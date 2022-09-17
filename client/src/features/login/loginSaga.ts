@@ -9,13 +9,14 @@ import { AuthResponse, AuthCredentials } from './loginTypes';
 export function* fetchLoginSaga(action: PayloadAction<AuthCredentials>): Generator<CallEffect<AuthResponse> | PutEffect<AnyAction>, void, AuthResponse> {
     const { payload } = action;
     const response = yield call(authenticate, payload);
-    if (response) {
+    if (false) {
         yield put(loginUserSuccess(response.token));
         setTokens(response.token);
         history.push('/clubs');
     } else {
+        //Control de errores aquí una vez esté el login correctamente tipada
         console.log(response);
-        yield put(loginUserError);
+        yield put(loginUserError(404));
     }
 }
 

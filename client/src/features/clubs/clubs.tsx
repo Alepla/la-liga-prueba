@@ -21,5 +21,3 @@ export const Clubs = () => {
         </div>
     );
 };
-
-export default Clubs;
