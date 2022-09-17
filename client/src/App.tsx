@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { Login } from './features/login/login';
 import { Clubs } from './features/clubs/clubs';
-import { ProtectedRoute, ProtectedRouteProps } from './app/components/protectedRoute/protectedRoute';
+import { NotFoundPage } from './features/notFoundPage/notFoundPage';
 import { history } from './helpers/history';
+import { ProtectedRoute, ProtectedRouteProps } from './app/components/protectedRoute/protectedRoute';
 import { CustomRouter } from './app/components/customRouter/customRouter';
 
 /**
@@ -20,6 +21,7 @@ export const App = () => {
                 <Route path="/clubs" element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<Clubs />} />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Navigate to="/login" replace />} />
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </CustomRouter>
     );

@@ -56,3 +56,5 @@ yarn && yarn start
 ## Memoria
 
 **_ Puedes documentar aquí la memoria de tu prueba _**
+
+Para documentar la memoria de la prueba he decidido utilizar un tablero de trello, donde he ido separando cada una de las tareas y posteriormente documentado el proceso de cada una de ellas: https://trello.com/b/hVER0MrX/la-liga-app

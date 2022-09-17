@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { isAuthenticated } from '../../app/services/authenticationService';
 import { AuthCredentials } from './loginTypes';
 import { history } from '../../helpers/history';
+import { authenticate } from './loginService';
 
 /**
  *
@@ -10,8 +11,7 @@ import { history } from '../../helpers/history';
  */
 export const Login = () => {
     const { register, handleSubmit } = useForm<AuthCredentials>();
-
-    const onSubmit: SubmitHandler<AuthCredentials> = (data) => console.log(data);
+    const onSubmit: SubmitHandler<AuthCredentials> = (data) => authenticate(data);
 
     useEffect(() => {
         if (isAuthenticated()) {
