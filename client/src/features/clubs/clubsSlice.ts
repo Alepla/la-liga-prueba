@@ -6,7 +6,11 @@ export type Clubs = {
     clubs: [];
 };
 
-const initialState: Clubs = { isProcessingRequest: false, clubs: [] };
+const initialState: Clubs = {
+    isProcessingRequest: false,
+    clubs: [],
+};
+
 export const clubsSlice = createSlice({
     name: 'clubs',
     initialState,

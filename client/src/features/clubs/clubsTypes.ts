@@ -1,1 +1,5 @@
-export type Clubs = {};
+export type ClubHeaders = {
+    login: {
+        accessToken: string;
+    };
+};
