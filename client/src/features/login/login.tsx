@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { AuthCredentials } from './loginTypes';
 import { history } from '../../helpers/history';
 import { useAppDispatch } from '../../app/hooks';
@@ -10,21 +9,27 @@ import { Box, Button, Center, Flex, FormControl, FormLabel, Input, Image, FormHe
 import loginHeader from '../../assets/img/loginHeader.jpg';
 import logo from '../../assets/img/logo.png';
 import { FeedbackControl } from '../../app/components/feedbackControl/feedbackControl';
+import { useFields } from './hooks/useFields';
+import { LOGIN_CONF } from './loginConsts';
 /**
  *
  * @returns
  */
 export const Login = () => {
     const { accessToken, status } = useSelector((state: RootState) => state.login);
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<AuthCredentials>();
-
+    const [fields, handleFieldChange, getErrors, errors] = useFields(LOGIN_CONF);
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const isValid = await getErrors();
+        if (isValid) {
+            const data: AuthCredentials = {
+                email: fields.email.value,
+                password: fields.password.value,
+            };
+            dispatch(loginUserFetch(data));
+        }
+    };
     const dispatch = useAppDispatch();
-
-    const onSubmit: SubmitHandler<AuthCredentials> = (data) => dispatch(loginUserFetch(data));
 
     useEffect(() => {
         if (accessToken) history.push('/clubs');
@@ -44,29 +49,15 @@ export const Login = () => {
                             </Center>
                         </Box>
                         <Box my={10} textAlign="left" p={4}>
-                            <form onSubmit={handleSubmit(onSubmit)}>
+                            <form onSubmit={onSubmit}>
                                 <FormControl>
                                     <FormLabel textTransform="uppercase" fontSize="xs" color="grey">
                                         Email
                                     </FormLabel>
-                                    <Input
-                                        type="text"
-                                        borderRadius="none"
-                                        borderColor="black"
-                                        {...register('email', {
-                                            required: true,
-                                            pattern:
-                                                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                        })}
-                                    />
-                                    {errors.email && errors.email.type === 'required' && (
+                                    <Input type="text" borderRadius="none" borderColor="black" id="email" value={fields.email.value} onChange={handleFieldChange} />
+                                    {errors.email && (
                                         <FormHelperText fontSize="sm" color="red">
-                                            Email is required
-                                        </FormHelperText>
-                                    )}
-                                    {errors.email && errors.email.type === 'pattern' && (
-                                        <FormHelperText fontSize="sm" color="red">
-                                            Please enter a valid email
+                                            {errors.email}
                                         </FormHelperText>
                                     )}
                                 </FormControl>
@@ -74,18 +65,10 @@ export const Login = () => {
                                     <FormLabel textTransform="uppercase" fontSize="xs" color="grey">
                                         Password
                                     </FormLabel>
-                                    <Input
-                                        type="password"
-                                        autoComplete="off"
-                                        borderRadius="none"
-                                        borderColor="black"
-                                        {...register('password', {
-                                            required: true,
-                                        })}
-                                    />
-                                    {errors.password && errors.password.type === 'required' && (
+                                    <Input type="password" id="password" autoComplete="off" borderRadius="none" borderColor="black" value={fields.password.value} onChange={handleFieldChange} />
+                                    {errors.password && (
                                         <FormHelperText fontSize="sm" color="red">
-                                            Password is required
+                                            {errors.password}
                                         </FormHelperText>
                                     )}
                                 </FormControl>
