@@ -6,17 +6,22 @@ import { setTokens } from '../../app/services/localStorage';
 import { history } from '../../helpers/history';
 import { AuthResponse, AuthCredentials } from './loginTypes';
 
-export function* fetchLoginSaga(action: PayloadAction<AuthCredentials>): Generator<CallEffect<AuthResponse> | PutEffect<AnyAction>, void, AuthResponse> {
+type Resp = {
+    token: string;
+    status: number;
+    message: string;
+};
+
+export function* fetchLoginSaga(action: PayloadAction<AuthCredentials>): Generator<CallEffect<Resp> | PutEffect<AnyAction>, void, Resp> {
     const { payload } = action;
-    const response = yield call(authenticate, payload);
-    if (false) {
-        yield put(loginUserSuccess(response.token));
-        setTokens(response.token);
+    const res = yield call(authenticate, payload);
+    if (res.token) {
+        yield put(loginUserSuccess(res.token));
+        setTokens(res.token);
         history.push('/clubs');
     } else {
-        //Control de errores aquí una vez esté el login correctamente tipada
-        console.log(response);
-        yield put(loginUserError(404));
+        console.log(res);
+        yield put(loginUserError(res.status));
     }
 }
 

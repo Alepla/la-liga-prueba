@@ -7,7 +7,7 @@ export const useFields = (initialState: LoginConf) => {
 
     const getErrors = async () => {
         let valid = false;
-        let errorMessage: any = errors;
+        let errorMessage: LoginErrors = errors;
         Object.keys(fields).forEach((field): void => {
             const validations = fields[field as keyof typeof fields].validations;
             switch (true) {
@@ -18,7 +18,7 @@ export const useFields = (initialState: LoginConf) => {
                     Object.assign(errorMessage, { [field]: `The ${field} must be valid` });
                     break;
                 default:
-                    delete errorMessage[field];
+                    delete errorMessage[field as keyof typeof fields];
                     if (Object.entries(errorMessage).length === 0) valid = true;
                     break;
             }

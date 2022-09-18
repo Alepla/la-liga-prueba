@@ -1,8 +1,10 @@
-export const showResponseMessage = (status: number) => {
+import { Status } from '../types/errorControlTypes';
+
+export const showResponseMessage = (status: Status) => {
     let type = '';
     let message = '';
 
-    switch (status) {
+    switch (status.status) {
         case 200:
             type = 'alert-success';
             message = '';

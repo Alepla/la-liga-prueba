@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -11,13 +11,13 @@ const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
-    <React.StrictMode>
+    <StrictMode>
         <Provider store={store}>
             <ChakraProvider>
                 <App />
             </ChakraProvider>
         </Provider>
-    </React.StrictMode>
+    </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
