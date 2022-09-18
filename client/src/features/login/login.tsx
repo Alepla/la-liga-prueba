@@ -42,7 +42,7 @@ export const Login = () => {
                     <Box h={650} maxWidth={400} borderWidth={[0, 1]} borderRadius={0} boxShadow={['none', 'lg']}>
                         <Box textAlign="center">
                             <Center>
-                                <Image src={loginHeader} />
+                                <Image alt="Login header" src={loginHeader} />
                             </Center>
                             <Center>
                                 <Image position="absolute" borderRadius="full" boxSize="100px" src={logo} alt="La Liga Logo" />

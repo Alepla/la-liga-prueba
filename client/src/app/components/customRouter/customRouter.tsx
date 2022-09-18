@@ -1,6 +1,8 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { Router } from 'react-router-dom';
 import { History } from 'history';
+import { NavBar } from '../navBar/navBar';
+import { isAuthenticated } from '../../services/authenticationService';
 
 interface ChildComponentProps {
     history: History;
@@ -23,5 +25,10 @@ export const CustomRouter = ({ history, ...props }: ChildComponentProps) => {
 
     useLayoutEffect(() => history.listen(setState), [history]);
 
-    return <Router {...props} location={state.location} navigationType={state.action} navigator={history} />;
+    return (
+        <>
+            {isAuthenticated() ? <NavBar /> : <></>}
+            <Router {...props} location={state.location} navigationType={state.action} navigator={history} />
+        </>
+    );
 };

@@ -9,6 +9,7 @@ export const setTokens = (authRes: string) => {
 
 export const removeTokens = () => {
     localStorage.removeItem('accessToken');
+    window.location.reload();
 };
 
 export const getAccessToken = () => localStorage.getItem('accessToken')?.slice(1, -1);

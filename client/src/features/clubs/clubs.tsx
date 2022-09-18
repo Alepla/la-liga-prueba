@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../app/hooks';
-import { removeTokens } from '../../app/services/localStorage';
 import { getClubsFetch } from './clubsSlice';
 import { Pagination } from '../../app/components/pagination/pagination';
 import { useSelector } from 'react-redux';
@@ -30,10 +29,8 @@ export const Clubs = () => {
 
     return (
         <div>
-            <button onClick={() => removeTokens()}>Logout</button>
-            <Input onChange={handleFieldChange}></Input>
-            <Button onClick={handleChangeFavorite}>See favorites</Button>
             <ClubsList clubs={clubs}></ClubsList>
+            <Button onClick={handleChangeFavorite}>See favorites</Button>
             <Pagination onClick={callbackPagination} total={total}></Pagination>
         </div>
     );
