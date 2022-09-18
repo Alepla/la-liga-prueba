@@ -1,21 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { ClubsItems } from './clubsTypes';
 
 export type Clubs = {
     isProcessingRequest: boolean;
-    clubs: [];
+    clubs: ClubsItems[];
+    total: number;
 };
 
 const initialState: Clubs = {
     isProcessingRequest: false,
     clubs: [],
+    total: 0,
 };
 
 export const clubsSlice = createSlice({
     name: 'clubs',
     initialState,
     reducers: {
-        getClubsFetch: (state) => {
+        getClubsFetch: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 isProcessingRequest: true,
@@ -24,6 +27,8 @@ export const clubsSlice = createSlice({
         getClubsSuccess: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
+                clubs: action.payload.results,
+                total: action.payload.total,
                 isProcessingRequest: false,
             };
         },

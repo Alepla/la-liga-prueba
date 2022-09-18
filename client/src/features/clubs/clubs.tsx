@@ -1,9 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { removeTokens } from '../../app/services/localStorage';
-import { RootState } from '../../app/store';
 import { getClubsFetch } from './clubsSlice';
+import { Pagination } from '../../app/components/pagination/pagination';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
+import { ClubsList } from './clubsList/clubsList';
+import { Button, Input } from '@chakra-ui/react';
+import { CLUBS_SEARCH_DEFAULT_PARAMS } from './clubsConsts';
+import { useSetSearchValues } from './hooks/useSetSearchValues';
 
 /**
  *
@@ -11,13 +16,25 @@ import { getClubsFetch } from './clubsSlice';
  */
 export const Clubs = () => {
     const dispatch = useAppDispatch();
+    const { clubs, total } = useSelector((state: RootState) => state.clubs);
+    const [callbackPagination, handleFieldChange, handleChangeFavorite, searchValues] = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
 
-    const onSubmit = () => dispatch(getClubsFetch());
+    if (total === 0 && searchValues.favorite) {
+        handleChangeFavorite();
+    }
+
+    useEffect(() => {
+        const { offset, limit, name_like, favorite } = searchValues;
+        dispatch(getClubsFetch({ offset, limit, name_like, favorite }));
+    }, [searchValues]);
 
     return (
         <div>
-            <p>clubs page</p>
-            <button onClick={onSubmit}>Remove token</button>
+            <button onClick={() => removeTokens()}>Logout</button>
+            <Input onChange={handleFieldChange}></Input>
+            <Button onClick={handleChangeFavorite}>See favorites</Button>
+            <ClubsList clubs={clubs}></ClubsList>
+            <Pagination onClick={callbackPagination} total={total}></Pagination>
         </div>
     );
 };

@@ -1,20 +1,22 @@
 import { call, takeEvery, put, CallEffect, PutEffect, select, SelectEffect } from 'redux-saga/effects';
-import { AnyAction } from '@reduxjs/toolkit';
+import { AnyAction, PayloadAction } from '@reduxjs/toolkit';
 import { getClubsSuccess, getClubsError } from './clubsSlice';
-import { ClubHeaders } from './clubsTypes';
-import { RootState } from '../../app/store';
+import { ClubHeaders, ClubsParams } from './clubsTypes';
+import { getClubs } from './clubsService';
 
-export function* fetchClubsSaga(): Generator<CallEffect<ClubHeaders> | PutEffect<AnyAction> | SelectEffect, void, ClubHeaders> {
+export function* fetchClubsSaga(action: PayloadAction<ClubsParams>): Generator<CallEffect<any> | PutEffect<AnyAction> | SelectEffect, void, ClubHeaders> {
+    const { payload } = action;
     const state = yield select();
     const config = {
         headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${state.login.accessToken}`,
         },
     };
-    console.log(config);
     try {
-        //const data = yield call();
-        //yield put(getClubsSuccess(data));
+        const data = yield call(getClubs, payload, config.headers);
+        yield put(getClubsSuccess(data));
     } catch (e) {
         yield put(getClubsError);
     }
