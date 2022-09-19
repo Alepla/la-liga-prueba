@@ -12,9 +12,9 @@ export type ClubsParams = {
 };
 
 export type ClubsItems = {
-    id?: string;
+    id: string;
     avatar?: string;
-    favourite?: boolean;
+    favorite: boolean;
     name?: string;
     foundationDate?: string;
 };

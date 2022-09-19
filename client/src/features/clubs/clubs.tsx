@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch } from '../../app/hooks';
-import { getClubsFetch } from './clubsSlice';
+import React, { useEffect, useState } from 'react';
+import { getClubs } from './clubsService';
 import { Pagination } from '../../app/components/pagination/pagination';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
 import { ClubsList } from './clubsList/clubsList';
-import { Button, Input } from '@chakra-ui/react';
+import { Box, Button, Input } from '@chakra-ui/react';
 import { CLUBS_SEARCH_DEFAULT_PARAMS } from './clubsConsts';
 import { useSetSearchValues } from './hooks/useSetSearchValues';
 
@@ -13,25 +10,33 @@ import { useSetSearchValues } from './hooks/useSetSearchValues';
  *
  * @returns
  */
-export const Clubs = () => {
-    const dispatch = useAppDispatch();
-    const { clubs, total } = useSelector((state: RootState) => state.clubs);
-    const [callbackPagination, handleFieldChange, handleChangeFavorite, searchValues] = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
 
-    if (total === 0 && searchValues.favorite) {
-        handleChangeFavorite();
-    }
+export const Clubs = () => {
+    const [defaultPage, setDefaultPage] = useState(0);
+    const [clubsResponse, setClubsResponse] = useState({
+        results: [],
+        total: 0,
+    });
+    const [callbackPagination, handleFieldChange, handleChangeFavorite, searchValues] = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
 
     useEffect(() => {
         const { offset, limit, name_like, favorite } = searchValues;
-        dispatch(getClubsFetch({ offset, limit, name_like, favorite }));
-    }, [searchValues]);
+        getClubs({ offset, limit, name_like, favorite }).then((res) => {
+            setClubsResponse(res);
+        });
+    }, [searchValues, defaultPage]);
+
+    const onClickFavorites = () => {
+        handleChangeFavorite();
+        setDefaultPage(0);
+    };
 
     return (
-        <div>
-            <ClubsList clubs={clubs}></ClubsList>
-            <Button onClick={handleChangeFavorite}>See favorites</Button>
-            <Pagination onClick={callbackPagination} total={total}></Pagination>
-        </div>
+        <Box margin={'20px'}>
+            <Input onChange={handleFieldChange} />
+            <Button onClick={onClickFavorites}>See favorites</Button>
+            <ClubsList clubs={clubsResponse.results}></ClubsList>
+            <Pagination onClick={callbackPagination} totalPages={Math.ceil(clubsResponse.total / 6)}></Pagination>
+        </Box>
     );
 };
