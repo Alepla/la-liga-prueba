@@ -3,26 +3,27 @@ import { store } from '../store';
 
 export const AuthInterceptor = () => {
     const state = store.getState();
-    const { login } = state;
+    const {
+        login: { accessToken },
+    } = state;
     fetchIntercept.register({
-        request: function (url: string, config: any) {
+        request: (url: string, config: any) => {
             config.headers = {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${login.accessToken}`,
+                Authorization: `Bearer ${accessToken}`,
             };
+
             return [url, config];
         },
 
-        requestError: function (error: any) {
+        requestError: (error: any) => {
             return Promise.reject(error);
         },
 
-        response: function (response: any) {
+        response: (response: any) => {
             return response;
         },
 
-        responseError: function (error: any) {
+        responseError: (error: any) => {
             return Promise.reject(error);
         },
     });

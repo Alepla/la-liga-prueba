@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Box, Flex, IconButton, Button, Stack, useColorModeValue, useBreakpointValue, useDisclosure, Image } from '@chakra-ui/react';
 import { removeTokens } from '../../services/localStorage';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+//import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import logo from '../../../assets/img/logo.png';
 
 export const NavBar = () => {
@@ -20,9 +20,9 @@ export const NavBar = () => {
                     borderColor={useColorModeValue('gray.200', 'gray.900')}
                     align={'center'}
                 >
-                    <Flex flex={{ base: 1, md: 'auto' }} ml={{ base: -2 }} display={{ base: 'flex', md: 'none' }}>
+                    {/* <Flex flex={{ base: 1, md: 'auto' }} ml={{ base: -2 }} display={{ base: 'flex', md: 'none' }}>
                         <IconButton onClick={onToggle} icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />} variant={'ghost'} aria-label={'Toggle Navigation'} />
-                    </Flex>
+                    </Flex> */}
                     <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
                         <Image boxSize="60px" textAlign={useBreakpointValue({ base: 'center', md: 'left' })} alt="La Liga Logo" src={logo} />
                     </Flex>

@@ -12,7 +12,6 @@ export const memoize = (fn: any) => {
          * de una ejecución anterior.
          */
         if (diccionario.hasOwnProperty(clave)) {
-            console.log('Devuelve resultado almacenado en el diccionario');
             return diccionario[clave];
         }
 
