@@ -5,6 +5,7 @@
     "baseUrl": ".",
     "dependencies": {
         "@chakra-ui/icon": "^3.0.10",
+        "@chakra-ui/icons": "^2.0.10",
         "@chakra-ui/react": "^2.0.0",
         "@emotion/react": "^11",
         "@emotion/styled": "^11",

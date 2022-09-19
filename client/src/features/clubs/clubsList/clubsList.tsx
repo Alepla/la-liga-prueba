@@ -1,7 +1,8 @@
 import React from 'react';
 import { ClubsItems } from '../clubsTypes';
-import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Button } from '@chakra-ui/react';
+import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormControl, FormLabel } from '@chakra-ui/react';
 import { updateClub } from '../clubsService';
+import { StarIcon } from '@chakra-ui/icons';
 export interface ClubsListProps {
     clubs: ClubsItems[];
     onUpdateClub: (club: ClubsItems) => void;
@@ -35,7 +36,8 @@ export const ClubsList = (props: ClubsListProps) => {
         <Flex flexWrap={'wrap'} justifyContent={'center'}>
             {clubs?.map((club: ClubsItems, key: number) => (
                 <Center key={key} py={6} display={'inline-block'} width={['400px']}>
-                    <Box maxW={'340px'} boxShadow={'2xl'} rounded={'md'} overflow={'hidden'}>
+                    <Box maxW={'340px'} boxShadow={'2xl'} rounded={'md'} overflow={'hidden'} borderRadius={'none'}>
+                        <StarIcon margin={'10px'} position="absolute" color={club.favorite ? '#ECC94B' : 'gray.300'} />
                         <Image h={'120px'} w={'full'} src={club.avatar} objectFit={'cover'} />
                         <Flex justify={'center'} mt={-12}>
                             <Avatar
@@ -46,7 +48,6 @@ export const ClubsList = (props: ClubsListProps) => {
                                 }}
                             />
                         </Flex>
-
                         <Box p={6}>
                             <Stack spacing={0} align={'center'} mb={5}>
                                 <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
@@ -55,21 +56,16 @@ export const ClubsList = (props: ClubsListProps) => {
                                 <Text color={'gray.500'}>{club.foundationDate}</Text>
                             </Stack>
 
-                            <Button
-                                type="submit"
-                                w={'full'}
-                                mt={8}
-                                bg={'#151f21'}
-                                color={'white'}
-                                rounded={'md'}
-                                _hover={{
-                                    transform: 'translateY(-2px)',
-                                    boxShadow: 'lg',
-                                }}
-                                onClick={() => addToFavorite(club.id, club.favorite)}
-                            >
-                                {club.favorite ? 'Added' : 'Add to favorite'}
-                            </Button>
+                            <Stack direction={'row'} justify={'center'} spacing={6}>
+                                <Stack spacing={0} align={'center'}>
+                                    <FormControl>
+                                        <FormLabel fontWeight={600}>{club.favorite ? 'Remove from favorites' : 'Add to favorites'}</FormLabel>
+                                        <Center>
+                                            <Switch onChange={() => addToFavorite(club.id, club.favorite)} isChecked={club.favorite ? true : false} />
+                                        </Center>
+                                    </FormControl>
+                                </Stack>
+                            </Stack>
                         </Box>
                     </Box>
                 </Center>

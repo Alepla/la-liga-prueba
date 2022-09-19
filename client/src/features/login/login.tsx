@@ -53,41 +53,71 @@ export const Login = () => {
     return (
         <Box>
             <Center h={['', '100vh']}>
-                <Flex w="full" align="center" justifyContent="center">
+                <Flex w={'full'} align={'center'} justifyContent={'center'}>
                     <Box h={650} maxWidth={400} borderWidth={[0, 1]} borderRadius={0} boxShadow={['none', 'lg']}>
-                        <Box textAlign="center">
+                        <Box textAlign={'center'}>
                             <Center>
-                                <Image alt="Login header" src={loginHeader} />
+                                <Image alt={'Login header'} src={loginHeader} />
                             </Center>
                             <Center>
-                                <Image position="absolute" borderRadius="full" boxSize="100px" src={logo} alt="La Liga Logo" />
+                                <Image position={'absolute'} borderRadius={'full'} boxSize={'100px'} src={logo} alt={'La Liga Logo'} />
                             </Center>
                         </Box>
-                        <Box my={10} textAlign="left" p={4}>
+                        <Box my={10} textAlign={'left'} p={4}>
                             <form onSubmit={onSubmit}>
                                 <FormControl>
-                                    <FormLabel textTransform="uppercase" fontSize="xs" color="grey">
+                                    <FormLabel textTransform={'uppercase'} fontSize={'xs'} color={'grey'}>
                                         Email
                                     </FormLabel>
-                                    <Input type="text" borderRadius="none" borderColor="black" id="email" value={fields.email.value} onChange={handleFieldChange} />
+                                    <Input
+                                        isInvalid={errors.email ? true : false}
+                                        errorBorderColor="crimson"
+                                        type={'text'}
+                                        borderRadius={'none'}
+                                        borderColor={'black'}
+                                        id={'email'}
+                                        value={fields.email.value}
+                                        onChange={handleFieldChange}
+                                    />
                                     {errors.email && (
-                                        <FormHelperText fontSize="sm" color="red">
+                                        <FormHelperText fontSize={'sm'} color={'red'}>
                                             {errors.email}
                                         </FormHelperText>
                                     )}
                                 </FormControl>
-                                <FormControl paddingTop="20px">
-                                    <FormLabel textTransform="uppercase" fontSize="xs" color="grey">
+                                <FormControl paddingTop={'20px'}>
+                                    <FormLabel textTransform={'uppercase'} fontSize={'xs'} color={'grey'}>
                                         Password
                                     </FormLabel>
-                                    <Input type="password" id="password" autoComplete="off" borderRadius="none" borderColor="black" value={fields.password.value} onChange={handleFieldChange} />
+                                    <Input
+                                        isInvalid={errors.password ? true : false}
+                                        errorBorderColor="crimson"
+                                        type={'password'}
+                                        id={'password'}
+                                        autoComplete={'off'}
+                                        borderRadius={'none'}
+                                        borderColor={'black'}
+                                        value={fields.password.value}
+                                        onChange={handleFieldChange}
+                                    />
                                     {errors.password && (
-                                        <FormHelperText fontSize="sm" color="red">
+                                        <FormHelperText fontSize={'sm'} color={'red'}>
                                             {errors.password}
                                         </FormHelperText>
                                     )}
                                 </FormControl>
-                                <Button type="submit" textTransform="uppercase" variant="outline" w="full" mt={4} colorScheme="black" borderRadius="none" background="black" color="white" h="55px">
+                                <Button
+                                    type={'submit'}
+                                    textTransform={'uppercase'}
+                                    variant={'outline'}
+                                    w={'full'}
+                                    mt={4}
+                                    colorScheme={'black'}
+                                    borderRadius={'none'}
+                                    background={'black'}
+                                    color={'white'}
+                                    h={'55px'}
+                                >
                                     Sign In
                                 </Button>
                             </form>

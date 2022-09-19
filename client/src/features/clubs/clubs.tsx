@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { getClubsMemoize, getFavClubs } from './clubsService';
 import { Pagination } from '../../app/components/pagination/pagination';
 import { ClubsList } from './clubsList/clubsList';
-import { Box, Button, Input } from '@chakra-ui/react';
+import { Box, Button, Flex, Input, InputGroup, InputLeftAddon, InputLeftElement } from '@chakra-ui/react';
 import { CLUBS_SEARCH_DEFAULT_PARAMS, CLUBS_DEFAULT_RESPONSE } from './clubsConsts';
 import { useSetSearchValues } from './hooks/useSetSearchValues';
 import { ClubsItems, ClubsResponse } from './clubsTypes';
+import { ChevronLeftIcon, ChevronRightIcon, Search2Icon, StarIcon } from '@chakra-ui/icons';
 
 /**
  *
@@ -77,10 +78,21 @@ export const Clubs = () => {
 
     return (
         <Box margin={'20px'}>
-            <Input onChange={handleFieldChange} />
-            <Button onClick={onClickFavorites}>See favorites</Button>
+            <Box>
+                <Flex justifyContent={'center'}>
+                    <InputGroup maxWidth={['66%', '50%']}>
+                        <InputLeftElement pointerEvents="none" children={<Search2Icon color="gray.300" />} />
+                        <Input borderRadius={'none'} placeholder="Search" onChange={handleFieldChange} />
+                    </InputGroup>
+                    <Button onClick={onClickFavorites} borderRadius={'none'}>
+                        <StarIcon color="#ECC94B" />
+                    </Button>
+                </Flex>
+            </Box>
             <ClubsList onUpdateClub={onUpdateClub} clubs={clubsResponse.results}></ClubsList>
-            <Pagination onClick={callbackPagination} totalPages={Math.ceil(clubsResponse.total / 6)}></Pagination>
+            <Flex justifyContent={'center'}>
+                <Pagination onClick={callbackPagination} totalPages={Math.ceil(clubsResponse.total / 6)}></Pagination>
+            </Flex>
         </Box>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Box, Button, HStack } from '@chakra-ui/react';
 import { useCounter } from './hooks/useCounter';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 export interface ChildProps {
     onClick: (offset: number) => void;
@@ -29,11 +30,11 @@ export const Pagination = (props: ChildProps) => {
     return (
         <Box>
             <HStack spacing="14px">
-                <Button onClick={restPage} disabled={page === 0}>
-                    PREV
+                <Button onClick={restPage} disabled={page === 0} borderRadius={'none'}>
+                    <ChevronLeftIcon boxSize={6} />
                 </Button>
-                <Button onClick={plusPage} disabled={page + 1 === totalPages || totalPages === 0}>
-                    NEXT
+                <Button borderRadius={'none'} onClick={plusPage} disabled={page + 1 === totalPages || totalPages === 0}>
+                    <ChevronRightIcon boxSize={6} />
                 </Button>
                 <Box>{`${page + 1} / ${totalPages == 0 ? 1 : totalPages}`}</Box>
             </HStack>
