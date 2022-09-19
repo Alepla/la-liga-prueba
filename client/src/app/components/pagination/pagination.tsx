@@ -7,10 +7,21 @@ export interface ChildProps {
     totalPages: number;
 }
 
+/**
+ *
+ * @param props
+ * @returns Component in charge of controlling pagination.
+ */
 export const Pagination = (props: ChildProps) => {
     const { onClick, totalPages } = props;
+    /**
+     * Custom hook in charge of adding or subtracting pages.
+     */
     const [restPage, plusPage, page] = useCounter(totalPages);
 
+    /**
+     * Hook responsible for sending the current page to the parent component.
+     */
     useEffect(() => {
         onClick(page);
     }, [page]);

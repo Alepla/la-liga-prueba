@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Flex, IconButton, Button, Stack, useColorModeValue, useBreakpointValue, useDisclosure, Image } from '@chakra-ui/react';
 import { removeTokens } from '../../services/localStorage';
 //import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import logo from '../../../assets/img/logo.png';
 
+/**
+ *
+ * @returns App navigation menu
+ */
 export const NavBar = () => {
     const { isOpen, onToggle } = useDisclosure();
     return (

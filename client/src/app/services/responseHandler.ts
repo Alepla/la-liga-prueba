@@ -1,5 +1,10 @@
 import { Error } from '../types/errorControlTypes';
 
+/**
+ *
+ * @param error
+ * @returns With this function we are not in charge of controlling what error to show to the user, if one comes by default from the API, we show that one, otherwise one by default defined by front.
+ */
 export const showResponseMessage = (error: Error) => {
     let {
         error: { message, status },

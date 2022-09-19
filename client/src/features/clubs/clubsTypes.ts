@@ -1,9 +1,3 @@
-export type ClubHeaders = {
-    login: {
-        accessToken: string;
-    };
-};
-
 export type ClubsParams = {
     offset: number;
     limit: number;
@@ -13,8 +7,18 @@ export type ClubsParams = {
 
 export type ClubsItems = {
     id: string;
-    avatar?: string;
+    avatar: string;
     favorite: boolean;
-    name?: string;
-    foundationDate?: string;
+    name: string;
+    foundationDate: string;
+};
+
+export type ClubUpdateParams = {
+    favorite: boolean;
+    clubID: string;
+};
+
+export type ClubsResponse = {
+    total: number;
+    results: ClubsItems[];
 };

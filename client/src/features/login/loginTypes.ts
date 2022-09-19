@@ -5,6 +5,8 @@ export type AuthCredentials = {
 
 export type AuthResponse = {
     token: string;
+    message: string;
+    status: number;
 };
 
 export type LoginConf = {
@@ -27,4 +29,19 @@ export type LoginConf = {
 export type LoginErrors = {
     email?: string;
     password?: string;
+};
+
+export type Authentication = {
+    isProcessingRequest: boolean;
+    accessToken?: string;
+    error: {
+        status: number | null;
+        message: string;
+    };
+    success: boolean;
+};
+
+export type ErrorResponse = {
+    message: string;
+    status: number;
 };

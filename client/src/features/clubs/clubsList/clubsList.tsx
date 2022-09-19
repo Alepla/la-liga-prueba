@@ -4,21 +4,36 @@ import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Button } from '
 import { updateClub } from '../clubsService';
 export interface ClubsListProps {
     clubs: ClubsItems[];
+    onUpdateClub: (club: ClubsItems) => void;
 }
 
+/**
+ *
+ * @param props
+ * @returns
+ */
 export const ClubsList = (props: ClubsListProps) => {
-    const { clubs } = props;
+    let { clubs, onUpdateClub } = props;
+    /**
+     *
+     * @param clubID
+     * @param isFavorite
+     * Función encargada de controlar el evento onClick del botón de añadir a favorito, la cual hace una petición al
+     * PATCH de clubs para actualizar el seleccionado.
+     */
     const addToFavorite = (clubID: string, isFavorite: boolean) => {
         const body = {
             favorite: !isFavorite,
             clubID,
         };
-        updateClub(body);
+        updateClub(body).then((clubUpdated: ClubsItems) => {
+            onUpdateClub(clubUpdated);
+        });
     };
 
     return (
         <Flex flexWrap={'wrap'} justifyContent={'center'}>
-            {clubs?.map((club, key) => (
+            {clubs?.map((club: ClubsItems, key: number) => (
                 <Center key={key} py={6} display={'inline-block'} width={['400px']}>
                     <Box maxW={'340px'} boxShadow={'2xl'} rounded={'md'} overflow={'hidden'}>
                         <Image h={'120px'} w={'full'} src={club.avatar} objectFit={'cover'} />

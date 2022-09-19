@@ -16,10 +16,21 @@ import { LOGIN_CONF } from './loginConsts';
  * @returns
  */
 export const Login = () => {
+    /**
+     * With useSelector we access the redux state to be able to use the token or the error if there has been one.
+     */
     const { accessToken, error } = useSelector((state: RootState) => state.login);
+    /**
+     * Custom hook that is responsible for controlling the form inputs.
+     */
     const [fields, handleFieldChange, getErrors, errors] = useFields(LOGIN_CONF);
     const dispatch = useAppDispatch();
 
+    /**
+     *
+     * @param e
+     * Function in charge of making a request to /login to log in the user.
+     */
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const isValid = await getErrors();
@@ -32,6 +43,9 @@ export const Login = () => {
         }
     };
 
+    /**
+     * Hook that redirects the user to /clubs if there is a token.
+     */
     useEffect(() => {
         if (accessToken) history.push('/clubs');
     }, []);

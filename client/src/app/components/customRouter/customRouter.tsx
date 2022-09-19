@@ -10,12 +10,12 @@ interface ChildComponentProps {
 }
 
 /**
- * With this component we are able to be attentive to any route change and return the corresponding view
+ *
  * @param {Object} history
  * @param {string} action
  * @param {Object} location
  * @param children
- * @returns
+ * @returns With this component we are able to be attentive to any route change and return the corresponding view
  */
 export const CustomRouter = ({ history, ...props }: ChildComponentProps) => {
     const [state, setState] = useState({

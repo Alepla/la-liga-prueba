@@ -1,37 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { AuthCredentials, AuthResponse } from './loginTypes';
-import { getAccessToken } from '../../app/services/localStorage';
+import { AuthCredentials, ErrorResponse } from './loginTypes';
+import { REDUX_INITIAL_STATE } from './loginConsts';
 
-export type Authentication = {
-    isProcessingRequest: boolean;
-    accessToken?: string;
-    error: {
-        status: number | null;
-        message: string;
-    };
-    success: boolean;
-};
-
-const initialState: Authentication = {
-    isProcessingRequest: false,
-    accessToken: getAccessToken(),
-    error: {
-        status: null,
-        message: '',
-    },
-    success: false,
-};
+const initialState = REDUX_INITIAL_STATE;
+/**
+ * All the reducers of the login component are declared here.
+ */
 export const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
+        /**
+         *
+         * @param state
+         * @param action
+         * @returns This function is in charge of communicating between the component or in this case the saga middleware with the API.
+         */
         loginUserFetch: (state, action: PayloadAction<AuthCredentials>) => {
             return {
                 ...state,
                 isProcessingRequest: true,
             };
         },
+        /**
+         *
+         * @param state
+         * @param action
+         * @returns If the response is as expected, it executes the following function which saves the authentication token in the redux state.
+         */
         loginUserSuccess: (state, action: PayloadAction<string>) => {
             return {
                 ...state,
@@ -40,7 +37,13 @@ export const loginSlice = createSlice({
                 isProcessingRequest: false,
             };
         },
-        loginUserError: (state, action: PayloadAction<any>) => {
+        /**
+         *
+         * @param state
+         * @param action
+         * @returns If the response is not the desired one, the error is saved.
+         */
+        loginUserError: (state, action: PayloadAction<ErrorResponse>) => {
             return {
                 ...state,
                 error: action.payload,

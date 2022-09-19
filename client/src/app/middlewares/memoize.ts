@@ -1,29 +1,25 @@
-export const memoize = (fn: any) => {
-    let diccionario: any = {};
-
-    return (...args: any) => {
+/**
+ *
+ * @param f
+ * @returns Middleware in charge of caching certain requests.
+ */
+export const memoize = <R, T extends (...args: any[]) => R>(f: T): T => {
+    const memory = new Map<string, R>();
+    const g = (...args: any[]) => {
         /**
-         * Se genera la clave.
+         * If the keys are not found in the dictionary enter the if.
          */
-        const clave = args.join('_');
-
-        /**
-         * Si la clave se encuentra en el diccionario, devuelve el valor
-         * de una ejecución anterior.
-         */
-        if (diccionario.hasOwnProperty(clave)) {
-            return diccionario[clave];
+        if (!memory.get(args.join())) {
+            /**
+             * The result is stored in the dictionary and the fn function is executed, passing it the parameters.
+             */
+            memory.set(args.join(), f(...args));
         }
-
         /**
-         * En caso contrario, se ejecuta la función fn pasándole los parámetros
+         * Return the keys.
          */
-        const result = fn(...args);
-
-        /**
-         * Se almacena el resultado en el diccionario
-         */
-        diccionario[clave] = result;
-        return result;
+        return memory.get(args.join());
     };
+
+    return g as T;
 };

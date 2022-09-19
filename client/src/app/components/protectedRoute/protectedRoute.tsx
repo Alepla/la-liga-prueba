@@ -8,10 +8,10 @@ export type ProtectedRouteProps = {
 };
 
 /**
- * With this component we verify that the user is logged in, if so he is redirected to the view specified previously in the App.* tsx and if this is not the case he is sent back to /login
+ *
  * @param {string} authenticationPath
  * @param {Object} outlet
- * @returns
+ * @returns With this component we verify that the user is logged in, if so he is redirected to the view specified previously * in the App.tsx and if this is not the case he is sent back to /login
  */
 
 export const ProtectedRoute = ({ authenticationPath, outlet }: ProtectedRouteProps) => {

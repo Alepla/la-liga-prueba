@@ -7,6 +7,10 @@ import { Box, Button, Center, Flex, FormControl, FormHelperText } from '@chakra-
  * @returns
  */
 export const NotFoundPage = () => {
+    /**
+     *
+     * @returns Hitting the Go back button redirects the user to /login if they are not logged in or /clubs if they are.
+     */
     const onSubmit = () => history.push('/');
 
     return (

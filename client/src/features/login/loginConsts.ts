@@ -1,3 +1,6 @@
+import { getAccessToken } from '../../app/services/localStorage';
+import { Authentication } from './loginTypes';
+
 export const LOGIN_CONF = {
     email: {
         value: '',
@@ -13,4 +16,19 @@ export const LOGIN_CONF = {
             pattern: null,
         },
     },
+};
+
+export const REDUX_INITIAL_STATE: Authentication = {
+    isProcessingRequest: false,
+    accessToken: getAccessToken(),
+    error: {
+        status: null,
+        message: '',
+    },
+    success: false,
+};
+
+export const BASIC_HEADERS = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
 };

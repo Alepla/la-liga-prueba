@@ -1,11 +1,25 @@
 import { env_var } from '../../config/env';
-import { post } from '../../app/services/apiService';
+import { handleResponse } from '../../app/services/apiService';
 import { AuthCredentials } from './loginTypes';
+import { BASIC_HEADERS } from './loginConsts';
 
+/**
+ *
+ * @param data
+ * @returns Service in charge of calling the API to log in the user.
+ */
 export const authenticate = async (data: AuthCredentials) => {
     const body = JSON.stringify({
         email: data.email,
         password: data.password,
     });
-    return await post(env_var.BASE_URL + 'login', body);
+    const url = env_var.BASE_URL + 'login';
+    const headers = BASIC_HEADERS;
+    return await fetch(url, { method: 'post', body, headers })
+        .then((response) => {
+            return handleResponse(response);
+        })
+        .catch((error) => {
+            return error;
+        });
 };

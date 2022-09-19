@@ -4,3 +4,8 @@ export const CLUBS_SEARCH_DEFAULT_PARAMS = {
     name_like: '',
     favorite: false,
 };
+
+export const CLUBS_DEFAULT_RESPONSE = {
+    results: [],
+    total: 0,
+};
