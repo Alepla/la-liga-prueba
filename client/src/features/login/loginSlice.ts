@@ -33,6 +33,7 @@ export const loginSlice = createSlice({
             return {
                 ...state,
                 accessToken: action.payload,
+                error: initialState.error,
                 success: true,
                 isProcessingRequest: false,
             };

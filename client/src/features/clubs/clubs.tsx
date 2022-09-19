@@ -8,11 +8,6 @@ import { useSetSearchValues } from './hooks/useSetSearchValues';
 import { ClubsItems, ClubsResponse } from './clubsTypes';
 import { ChevronLeftIcon, ChevronRightIcon, Search2Icon, StarIcon } from '@chakra-ui/icons';
 
-/**
- *
- * @returns
- */
-
 export const Clubs = () => {
     /**
      * Utilizamos defaultPage para indicarle una página por defecto al componente de la paginación

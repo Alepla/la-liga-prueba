@@ -1,6 +1,6 @@
 export type Error = {
-    error: {
-        status: number | null;
-        message: string;
-    };
+    message: string;
+    status: number | null;
 };
+
+export type Status = 'success' | 'error' | undefined;

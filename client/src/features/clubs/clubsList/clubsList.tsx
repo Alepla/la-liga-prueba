@@ -1,8 +1,9 @@
 import React from 'react';
 import { ClubsItems } from '../clubsTypes';
-import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormControl, FormLabel } from '@chakra-ui/react';
+import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { updateClub } from '../clubsService';
 import { StarIcon } from '@chakra-ui/icons';
+import { showResponseMessage } from '../../../app/services/responseHandler';
 export interface ClubsListProps {
     clubs: ClubsItems[];
     onUpdateClub: (club: ClubsItems) => void;
@@ -15,6 +16,7 @@ export interface ClubsListProps {
  */
 export const ClubsList = (props: ClubsListProps) => {
     let { clubs, onUpdateClub } = props;
+    const toast = useToast();
     /**
      *
      * @param clubID
@@ -29,7 +31,26 @@ export const ClubsList = (props: ClubsListProps) => {
         };
         updateClub(body).then((clubUpdated: ClubsItems) => {
             onUpdateClub(clubUpdated);
+            if (clubUpdated.id) {
+                const { type, message } = showResponseMessage({ status: 200, message: 'Saved correctly' });
+                toast({
+                    title: message,
+                    status: type,
+                    duration: 9000,
+                    isClosable: true,
+                });
+            }
         });
+    };
+
+    const returnDateFormated = (date: string) => {
+        const newDate = new Date(date);
+        const dateFormated = {
+            year: newDate.getFullYear(),
+            month: newDate.getMonth(),
+            day: newDate.getDay(),
+        };
+        return dateFormated.day + '/' + dateFormated.month + '/' + dateFormated.year;
     };
 
     return (
@@ -53,7 +74,7 @@ export const ClubsList = (props: ClubsListProps) => {
                                 <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
                                     {club.name}
                                 </Heading>
-                                <Text color={'gray.500'}>{club.foundationDate}</Text>
+                                <Text color={'gray.500'}>{returnDateFormated(club.foundationDate)}</Text>
                             </Stack>
 
                             <Stack direction={'row'} justify={'center'} spacing={6}>

@@ -5,16 +5,13 @@ import { useAppDispatch } from '../../app/hooks';
 import { loginUserFetch } from './loginSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { Box, Button, Center, Flex, FormControl, FormLabel, Input, Image, FormHelperText } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, FormControl, FormLabel, Input, Image, FormHelperText, useToast } from '@chakra-ui/react';
 import loginHeader from '../../assets/img/loginHeader.jpg';
 import logo from '../../assets/img/logo.png';
-import { FeedbackControl } from '../../app/components/feedbackControl/feedbackControl';
 import { useFields } from './hooks/useFields';
 import { LOGIN_CONF } from './loginConsts';
-/**
- *
- * @returns
- */
+import { showResponseMessage } from '../../app/services/responseHandler';
+
 export const Login = () => {
     /**
      * With useSelector we access the redux state to be able to use the token or the error if there has been one.
@@ -25,7 +22,7 @@ export const Login = () => {
      */
     const [fields, handleFieldChange, getErrors, errors] = useFields(LOGIN_CONF);
     const dispatch = useAppDispatch();
-
+    const toast = useToast();
     /**
      *
      * @param e
@@ -48,7 +45,16 @@ export const Login = () => {
      */
     useEffect(() => {
         if (accessToken) history.push('/clubs');
-    }, []);
+        if (error.status) {
+            const { type, message } = showResponseMessage(error);
+            toast({
+                title: message,
+                status: type,
+                duration: 9000,
+                isClosable: true,
+            });
+        }
+    }, [accessToken, error]);
 
     return (
         <Box>
@@ -122,7 +128,6 @@ export const Login = () => {
                                 </Button>
                             </form>
                         </Box>
-                        <FeedbackControl error={error}></FeedbackControl>
                     </Box>
                 </Flex>
             </Center>
