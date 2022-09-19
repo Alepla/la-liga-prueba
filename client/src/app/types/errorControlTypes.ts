@@ -1,3 +1,6 @@
-export type Status = {
-    status: number | null;
+export type Error = {
+    error: {
+        status: number | null;
+        message: string;
+    };
 };

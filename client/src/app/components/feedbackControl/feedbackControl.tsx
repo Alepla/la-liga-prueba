@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Alert, AlertIcon, AlertTitle } from '@chakra-ui/react';
 import { showResponseMessage } from '../../services/responseHandler';
-import { Status } from '../../types/errorControlTypes';
+import { Error } from '../../types/errorControlTypes';
 
-export const FeedbackControl = (status: Status) => {
-    const { type, message } = showResponseMessage(status);
+export const FeedbackControl = (error: Error) => {
+    const { type, message } = showResponseMessage(error);
 
     return (
         <Box>

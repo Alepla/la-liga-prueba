@@ -20,6 +20,7 @@ export const useSetSearchValues = (initialState: ClubsParams) => {
     const handleChangeFavorite = () => {
         setSearchValues({
             ...searchValues,
+            offset: 0,
             favorite: !searchValues.favorite,
         });
     };

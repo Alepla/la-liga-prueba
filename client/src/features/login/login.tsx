@@ -16,8 +16,10 @@ import { LOGIN_CONF } from './loginConsts';
  * @returns
  */
 export const Login = () => {
-    const { accessToken, status } = useSelector((state: RootState) => state.login);
+    const { accessToken, error } = useSelector((state: RootState) => state.login);
     const [fields, handleFieldChange, getErrors, errors] = useFields(LOGIN_CONF);
+    const dispatch = useAppDispatch();
+
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const isValid = await getErrors();
@@ -29,7 +31,6 @@ export const Login = () => {
             dispatch(loginUserFetch(data));
         }
     };
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (accessToken) history.push('/clubs');
@@ -77,7 +78,7 @@ export const Login = () => {
                                 </Button>
                             </form>
                         </Box>
-                        <FeedbackControl status={status}></FeedbackControl>
+                        <FeedbackControl error={error}></FeedbackControl>
                     </Box>
                 </Flex>
             </Center>

@@ -1,30 +1,32 @@
-import { Status } from '../types/errorControlTypes';
+import { Error } from '../types/errorControlTypes';
 
-export const showResponseMessage = (status: Status) => {
+export const showResponseMessage = (error: Error) => {
+    let {
+        error: { message, status },
+    } = error;
     let type = '';
-    let message = '';
 
-    switch (status.status) {
+    switch (status) {
         case 200:
             type = 'alert-success';
-            message = '';
+            message = message ? message : '';
             break;
         case 400:
             type = 'alert-danger';
-            message = 'La solicitud no tiene el formato correcto';
+            message = message ? message : 'The request is not in the correct format';
             break;
         case 401:
         case 403:
             type = 'alert-danger';
-            message = 'No tiene permisos para acceder al recurso solicitado';
+            message = message ? message : 'You do not have permissions to access the requested resource';
             break;
         case 404:
             type = 'alert-danger';
-            message = 'Recurso no encontrado';
+            message = message ? message : 'Resource not found';
             break;
         case 500:
             type = 'alert-danger';
-            message = 'Se ha producido un error en el servidor';
+            message = message ? message : 'An error has occurred on the server';
             break;
     }
     return { type, message };

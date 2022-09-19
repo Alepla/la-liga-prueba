@@ -8,11 +8,13 @@ import { AuthResponse, AuthCredentials } from './loginTypes';
 
 type Resp = {
     token: string;
-    status: number;
-    message: string;
+    error: {
+        status: null;
+        message: '';
+    };
 };
 
-export function* fetchLoginSaga(action: PayloadAction<AuthCredentials>): Generator<CallEffect<Resp> | PutEffect<AnyAction>, void, Resp> {
+function* fetchLoginSaga(action: PayloadAction<AuthCredentials>): Generator<CallEffect<Resp> | PutEffect<AnyAction>, void, Resp> {
     const { payload } = action;
     const res = yield call(authenticate, payload);
     if (res.token) {
@@ -21,10 +23,10 @@ export function* fetchLoginSaga(action: PayloadAction<AuthCredentials>): Generat
         history.push('/clubs');
     } else {
         console.log(res);
-        yield put(loginUserError(res.status));
+        yield put(loginUserError(res));
     }
 }
 
-export default function* rootSaga() {
+export default function* watchUserSaga() {
     yield takeEvery('login/loginUserFetch', fetchLoginSaga);
 }

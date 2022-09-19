@@ -6,14 +6,20 @@ import { getAccessToken } from '../../app/services/localStorage';
 export type Authentication = {
     isProcessingRequest: boolean;
     accessToken?: string;
-    status: number | null;
+    error: {
+        status: number | null;
+        message: string;
+    };
     success: boolean;
 };
 
 const initialState: Authentication = {
     isProcessingRequest: false,
     accessToken: getAccessToken(),
-    status: null,
+    error: {
+        status: null,
+        message: '',
+    },
     success: false,
 };
 export const loginSlice = createSlice({
@@ -34,10 +40,10 @@ export const loginSlice = createSlice({
                 isProcessingRequest: false,
             };
         },
-        loginUserError: (state, action: PayloadAction<number>) => {
+        loginUserError: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
-                status: action.payload,
+                error: action.payload,
                 success: false,
                 isProcessingRequest: false,
             };

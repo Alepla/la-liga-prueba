@@ -1,6 +1,4 @@
-import { Headers } from '../types/apiParamsTypes';
 import { memoize } from '../middlewares/memoize';
-import { AuthInterceptor } from '../middlewares/authInterceptor';
 
 type Resp = {
     token: string;
@@ -8,37 +6,51 @@ type Resp = {
     message: string;
 };
 
+const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+};
+
+const handleResponse = async (response: any) => {
+    const isJson = response.headers.get('content-type')?.includes('application/json');
+    const data = isJson ? await response.json() : null;
+    // check for error response
+    if (!response.ok) {
+        // get error message from body or default to response status
+        return Promise.reject(data);
+    } else {
+        return data;
+    }
+};
+
 export const get = memoize(async (url: string): Promise<any> => {
-    AuthInterceptor();
-    return await fetch(url, { method: 'get' })
-        .then((res) => res.json())
-        .then((data) => {
-            return data;
+    return await fetch(url, { method: 'get', headers })
+        .then((response) => {
+            return handleResponse(response);
         })
-        .catch((err) => {
-            return err;
+        .catch((error) => {
+            return error;
         });
 });
 
-export const post = async (url: string, body: any, headers: Headers): Promise<Resp> => {
-    return await fetch(url, { method: 'post', headers, body })
-        .then((res) => res.json())
-        .then((data) => {
-            return data;
+export const post = async (url: string, body: any): Promise<any> => {
+    return await fetch(url, { method: 'post', body, headers })
+        .then((response) => {
+            return handleResponse(response);
         })
-        .catch((err) => {
-            return err;
+        .catch((error) => {
+            return error;
         });
 };
 
-export const patch = async (url: string, body: any): Promise<Resp> => {
-    AuthInterceptor();
-    return await fetch(url, { method: 'PATCH', body })
-        .then((res) => res.json())
-        .then((data) => {
-            return data;
+export const patch = async (url: string, body: any): Promise<any> => {
+    console.log(body);
+    return await fetch(url, { method: 'PATCH', body, headers })
+        .then((response) => {
+            console.log(response);
+            return handleResponse(response);
         })
-        .catch((err) => {
-            return err;
+        .catch((error) => {
+            return error;
         });
 };
