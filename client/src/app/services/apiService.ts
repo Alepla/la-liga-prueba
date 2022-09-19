@@ -24,7 +24,7 @@ const handleResponse = async (response: any) => {
 };
 
 export const get = memoize(async (url: string): Promise<any> => {
-    return await fetch(url, { method: 'get', headers })
+    return await fetch(url, { method: 'get' })
         .then((response) => {
             return handleResponse(response);
         })
@@ -45,7 +45,7 @@ export const post = async (url: string, body: any): Promise<any> => {
 
 export const patch = async (url: string, body: any): Promise<any> => {
     console.log(body);
-    return await fetch(url, { method: 'PATCH', body, headers })
+    return await fetch(url, { method: 'PATCH', body })
         .then((response) => {
             console.log(response);
             return handleResponse(response);

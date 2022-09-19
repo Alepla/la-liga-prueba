@@ -9,6 +9,8 @@ export const AuthInterceptor = () => {
     fetchIntercept.register({
         request: (url: string, config: any) => {
             config.headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`,
             };
 
