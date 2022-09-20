@@ -17,7 +17,7 @@ interface ChildComponentProps {
  * @param children
  * @returns With this component we are able to be attentive to any route change and return the corresponding view
  */
-export const CustomRouter = ({ history, ...props }: ChildComponentProps) => {
+export const CustomRouter = ({ history, ...props }: ChildComponentProps): JSX.Element => {
     const [state, setState] = useState({
         action: history.action,
         location: history.location,

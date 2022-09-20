@@ -6,12 +6,12 @@ import { Box, Button, Center, Flex, FormControl, FormHelperText } from '@chakra-
  *
  * @returns
  */
-export const NotFoundPage = () => {
+export const NotFoundPage = (): JSX.Element => {
     /**
      *
      * @returns Hitting the Go back button redirects the user to /login if they are not logged in or /clubs if they are.
      */
-    const onSubmit = () => history.push('/');
+    const onSubmit = (): void => history.push('/');
 
     return (
         <Box>

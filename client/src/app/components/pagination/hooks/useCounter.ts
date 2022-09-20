@@ -17,11 +17,11 @@ export const useCounter = (totalPages: number) => {
         setNumberOfPages(totalPages);
     }
 
-    const restPage = () => {
+    const restPage = (): void => {
         setPage((prev) => prev - 1);
     };
 
-    const plusPage = () => {
+    const plusPage = (): void => {
         setPage((prev) => prev + 1);
     };
 

@@ -14,7 +14,7 @@ const defaultProtectedRouteProps: Omit<ProtectedRouteProps, 'outlet'> = {
     authenticationPath: '/login',
 };
 
-export const App = () => {
+export const App = (): JSX.Element => {
     return (
         <CustomRouter history={history}>
             <Routes>

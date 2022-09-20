@@ -17,7 +17,7 @@ export const useFields = (initialState: LoginConf) => {
      *
      * @returns Function responsible for returning errors depending on the specified validations.
      */
-    const getErrors = async () => {
+    const getErrors = async (): Promise<boolean> => {
         let valid = false;
         /**
          * We create a copy of the errors saved in the state so as not to update them within a loop.

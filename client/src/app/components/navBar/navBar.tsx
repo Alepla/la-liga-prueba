@@ -8,7 +8,7 @@ import logo from '../../../assets/img/logo.png';
  *
  * @returns App navigation menu
  */
-export const NavBar = () => {
+export const NavBar = (): JSX.Element => {
     const { isOpen, onToggle } = useDisclosure();
     return (
         <>

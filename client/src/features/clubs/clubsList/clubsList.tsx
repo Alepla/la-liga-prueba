@@ -14,7 +14,7 @@ export interface ClubsListProps {
  * @param props
  * @returns
  */
-export const ClubsList = (props: ClubsListProps) => {
+export const ClubsList = (props: ClubsListProps): JSX.Element => {
     let { clubs, onUpdateClub } = props;
     const toast = useToast();
     /**
@@ -24,12 +24,12 @@ export const ClubsList = (props: ClubsListProps) => {
      * Función encargada de controlar el evento onClick del botón de añadir a favorito, la cual hace una petición al
      * PATCH de clubs para actualizar el seleccionado.
      */
-    const addToFavorite = (clubID: string, isFavorite: boolean) => {
+    const addToFavorite = (clubID: string, isFavorite: boolean): void => {
         const body = {
             favorite: !isFavorite,
             clubID,
         };
-        updateClub(body).then((clubUpdated: ClubsItems) => {
+        updateClub(body).then((clubUpdated: ClubsItems): void => {
             onUpdateClub(clubUpdated);
             if (clubUpdated.id) {
                 const { type, message } = showResponseMessage({ status: 200, message: 'Saved correctly' });

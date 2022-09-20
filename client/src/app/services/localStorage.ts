@@ -3,13 +3,13 @@
  * @param authRes
  * We store the token in local storage.
  */
-export const setTokens = (authRes: string) => {
+export const setTokens = (authRes: string): void => {
     localStorage.setItem('accessToken', JSON.stringify(authRes));
 };
 /**
  * We delete the token and refresh the page.
  */
-export const removeTokens = () => {
+export const removeTokens = (): void => {
     localStorage.removeItem('accessToken');
     window.location.reload();
 };
@@ -18,4 +18,4 @@ export const removeTokens = () => {
  *
  * @returns With this service we extract the local storage token.
  */
-export const getAccessToken = () => localStorage.getItem('accessToken')?.slice(1, -1);
+export const getAccessToken = (): string | undefined => localStorage.getItem('accessToken')?.slice(1, -1);

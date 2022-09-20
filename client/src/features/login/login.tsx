@@ -12,7 +12,7 @@ import { useFields } from './hooks/useFields';
 import { LOGIN_CONF } from './loginConsts';
 import { showResponseMessage } from '../../app/services/responseHandler';
 
-export const Login = () => {
+export const Login = (): JSX.Element => {
     /**
      * With useSelector we access the redux state to be able to use the token or the error if there has been one.
      */
@@ -28,7 +28,7 @@ export const Login = () => {
      * @param e
      * Function in charge of making a request to /login to log in the user.
      */
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         const isValid = await getErrors();
         if (isValid) {

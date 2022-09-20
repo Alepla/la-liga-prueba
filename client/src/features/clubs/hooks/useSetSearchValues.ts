@@ -13,7 +13,7 @@ export const useSetSearchValues = (initialState: ClubsParams) => {
      * @param offset
      * Función que actualiza el offset para la paginación
      */
-    const callbackPagination = (offset: number) => {
+    const callbackPagination = (offset: number): void => {
         setSearchValues({
             ...searchValues,
             offset: offset,
@@ -35,7 +35,7 @@ export const useSetSearchValues = (initialState: ClubsParams) => {
     /**
      * Función que es activado por el botón de favortios.
      */
-    const handleChangeFavorite = () => {
+    const handleChangeFavorite = (): void => {
         setSearchValues({
             ...searchValues,
             offset: 0,

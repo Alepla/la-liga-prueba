@@ -6,9 +6,9 @@ import { Box, Button, Flex, Input, InputGroup, InputLeftAddon, InputLeftElement 
 import { CLUBS_SEARCH_DEFAULT_PARAMS, CLUBS_DEFAULT_RESPONSE } from './clubsConsts';
 import { useSetSearchValues } from './hooks/useSetSearchValues';
 import { ClubsItems, ClubsResponse } from './clubsTypes';
-import { ChevronLeftIcon, ChevronRightIcon, Search2Icon, StarIcon } from '@chakra-ui/icons';
+import { Search2Icon, StarIcon } from '@chakra-ui/icons';
 
-export const Clubs = () => {
+export const Clubs = (): JSX.Element => {
     /**
      * Utilizamos defaultPage para indicarle una página por defecto al componente de la paginación
      */
@@ -30,11 +30,11 @@ export const Clubs = () => {
     useEffect(() => {
         const { offset, limit, name_like, favorite } = searchValues;
         if (favorite) {
-            getFavClubs({ offset, limit, name_like, favorite }).then((res: ClubsResponse) => {
+            getFavClubs({ offset, limit, name_like, favorite }).then((res: ClubsResponse): void => {
                 setClubsResponse(res);
             });
         } else {
-            getClubsMemoize(offset, limit, name_like).then((res: ClubsResponse) => {
+            getClubsMemoize(offset, limit, name_like).then((res: ClubsResponse): void => {
                 setClubsResponse(res);
             });
         }
@@ -43,7 +43,7 @@ export const Clubs = () => {
     /**
      * Función que se triggerea cada vez que se filtra por favoritos y setando defaultPage a 0
      */
-    const onClickFavorites = () => {
+    const onClickFavorites = (): void => {
         handleChangeFavorite();
         setDefaultPage(0);
     };
@@ -55,7 +55,7 @@ export const Clubs = () => {
      * El funcionamiento es el siguiente, cogemos del estado los clubs, los mapeamos y buscamos el que tenga el mismo id que
      * el club modificado, para actualizarlo, creando un nuevo array actualizado y finalmente añadiendolo al estado.
      */
-    const onUpdateClub = (clubUpdated: ClubsItems) => {
+    const onUpdateClub = (clubUpdated: ClubsItems): void => {
         const { results } = clubsResponse;
         const clubs = results.map((club) => {
             if (club.id === clubUpdated.id) {

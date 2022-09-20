@@ -14,7 +14,7 @@ export type ProtectedRouteProps = {
  * @returns With this component we verify that the user is logged in, if so he is redirected to the view specified previously * in the App.tsx and if this is not the case he is sent back to /login
  */
 
-export const ProtectedRoute = ({ authenticationPath, outlet }: ProtectedRouteProps) => {
+export const ProtectedRoute = ({ authenticationPath, outlet }: ProtectedRouteProps): JSX.Element => {
     if (isAuthenticated()) {
         return outlet;
     } else {

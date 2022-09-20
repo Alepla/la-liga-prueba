@@ -1,6 +1,6 @@
 import { env_var } from '../../config/env';
 import { handleResponse } from '../../app/services/apiService';
-import { AuthCredentials } from './loginTypes';
+import { AuthCredentials, AuthResponse } from './loginTypes';
 import { BASIC_HEADERS } from './loginConsts';
 
 /**
@@ -8,7 +8,7 @@ import { BASIC_HEADERS } from './loginConsts';
  * @param data
  * @returns Service in charge of calling the API to log in the user.
  */
-export const authenticate = async (data: AuthCredentials) => {
+export const authenticate = async (data: AuthCredentials): Promise<AuthResponse> => {
     const body = JSON.stringify({
         email: data.email,
         password: data.password,

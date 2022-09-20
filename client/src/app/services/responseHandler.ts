@@ -1,11 +1,11 @@
-import { Error, Status } from '../types/errorControlTypes';
+import { Error, Status, ErrorHandlerResponse } from '../types/errorControlTypes';
 
 /**
  *
  * @param error
  * @returns With this function we are not in charge of controlling what error to show to the user, if one comes by default from the API, we show that one, otherwise one by default defined by front.
  */
-export const showResponseMessage = (error: Error) => {
+export const showResponseMessage = (error: Error): ErrorHandlerResponse => {
     let { message, status } = error;
     let type: Status = undefined;
 

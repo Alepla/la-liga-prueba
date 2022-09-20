@@ -13,8 +13,8 @@ export interface ChildProps {
  * @param props
  * @returns Component in charge of controlling pagination.
  */
-export const Pagination = (props: ChildProps) => {
-    const { onClick, totalPages } = props;
+export const Pagination = (props: ChildProps): JSX.Element => {
+    const { onClick, totalPages = 0 } = props;
     /**
      * Custom hook in charge of adding or subtracting pages.
      */
