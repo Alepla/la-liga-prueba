@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { Router } from 'react-router-dom';
 import { History } from 'history';
-import { NavBar } from '../navBar/navBar';
+import { NavBar } from '../../components/navBar/navBar';
 import { isAuthenticated } from '../../services/authenticationService';
 
 interface ChildComponentProps {
