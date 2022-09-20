@@ -4,7 +4,7 @@ import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormCon
 import { updateClub } from '../clubsService';
 import { StarIcon } from '@chakra-ui/icons';
 import { showResponseMessage } from '../../../app/services/responseHandler';
-import { formatDates } from '../../../utils/formatDates';
+import { formatDates } from '../../../app/utils/formatDates';
 export interface ClubsListProps {
     clubs: ClubsItems[];
     onUpdateClub: (club: ClubsItems) => void;

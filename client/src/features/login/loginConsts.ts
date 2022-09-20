@@ -1,5 +1,6 @@
 import { getAccessToken } from '../../app/services/localStorage';
 import { Authentication } from './loginTypes';
+import { Headers } from '../../app/types/apiParamsTypes';
 
 export const LOGIN_CONF = {
     email: {
@@ -28,7 +29,7 @@ export const REDUX_INITIAL_STATE: Authentication = {
     success: false,
 };
 
-export const BASIC_HEADERS = {
+export const BASIC_HEADERS: Headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
-import { renderWithProviders } from '../../../utils/test-utils';
+import { renderWithProviders } from '../../../app/utils/test-utils';
 import { Login } from '../login';
 
 window.matchMedia = (query) => ({

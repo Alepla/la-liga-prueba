@@ -6,9 +6,9 @@ import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
 
-import type { AppStore, RootState } from '../app/store';
+import type { AppStore, RootState } from '../store';
 // As a basic setup, import your same slice reducers
-import { loginReducer } from '../features/login/loginSlice';
+import { loginReducer } from '../../features/login/loginSlice';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.

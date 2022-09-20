@@ -1,58 +1,45 @@
-import { env_var } from '../../config/env';
 import { ClubUpdateParams, ClubsParams, ClubsResponse, ClubsItems } from './clubsTypes';
-import { AuthInterceptor } from '../../app/middlewares/authInterceptor';
-import { handleResponse } from '../../app/services/apiService';
+import { superFetch } from '../../app/utils/superFetch';
 import { memoize } from '../../app/middlewares/memoize';
 
 /**
  *
- * @param params
- * @returns devuelve el listado de clubs favoritos del usuario.
+ * @param data
+ * @returns Returns the list of user's favorite clubs.
  */
-export const getFavClubs = async (params: ClubsParams): Promise<ClubsResponse> => {
-    const { offset, limit, name_like, favorite } = params;
+export const getFavClubs = async (data: ClubsParams): Promise<ClubsResponse> => {
+    const { offset, limit, name_like, favorite } = data;
     const fav = favorite ? `&favorite=${favorite}` : ``;
-    const url = env_var.BASE_URL + `api/clubs?offset=${offset}&limit=${limit}&name_like=${name_like}${fav}`;
-    AuthInterceptor();
-    return await fetch(url, { method: 'get' })
-        .then((response) => {
-            return handleResponse(response);
-        })
-        .catch((error) => {
-            return error;
-        });
+    const params = {
+        url: `api/clubs?offset=${offset}&limit=${limit}&name_like=${name_like}${fav}`,
+        method: 'get',
+    };
+    return await superFetch(params);
 };
 
 /**
- * Función cacheada para guardar el listado de clubs del usuario.
+ * Cache function to save the list of user clubs.
  */
 export const getClubsMemoize = memoize(async (offset: number, limit: number, name_like: string): Promise<ClubsResponse> => {
-    const url = env_var.BASE_URL + `api/clubs?offset=${offset}&limit=${limit}&name_like=${name_like}`;
-    AuthInterceptor();
-    return await fetch(url, { method: 'get' })
-        .then((response) => {
-            return handleResponse(response);
-        })
-        .catch((error) => {
-            return error;
-        });
+    const params = {
+        url: `api/clubs?offset=${offset}&limit=${limit}&name_like=${name_like}`,
+        method: 'get',
+    };
+    return await superFetch(params);
 });
 
 /**
  *
- * @param params
- * @returns Función encargada de actualizar un club, añadiendolo a favoritos.
+ * @param data
+ * @returns Function in charge of updating a club, adding it to favorites.
  */
-export const updateClub = async (params: ClubUpdateParams): Promise<ClubsItems> => {
-    const { favorite, clubID } = params;
+export const updateClub = async (data: ClubUpdateParams): Promise<ClubsItems> => {
+    const { favorite, clubID } = data;
     const body = JSON.stringify({ favorite });
-    const url = env_var.BASE_URL + `api/clubs/${clubID}`;
-    AuthInterceptor();
-    return await fetch(url, { method: 'PATCH', body })
-        .then((response) => {
-            return handleResponse(response);
-        })
-        .catch((error) => {
-            return error;
-        });
+    const params = {
+        url: `api/clubs/${clubID}`,
+        method: 'PATCH',
+        body,
+    };
+    return await superFetch(params);
 };
