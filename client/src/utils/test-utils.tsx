@@ -4,6 +4,7 @@ import type { RenderOptions } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { ChakraProvider } from '@chakra-ui/react';
 
 import type { AppStore, RootState } from '../app/store';
 // As a basic setup, import your same slice reducers
@@ -26,7 +27,11 @@ export function renderWithProviders(
     }: ExtendedRenderOptions = {}
 ) {
     function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
-        return <Provider store={store}>{children}</Provider>;
+        return (
+            <Provider store={store}>
+                <ChakraProvider>{children}</ChakraProvider>
+            </Provider>
+        );
     }
 
     // Return an object with the store and all of RTL's query functions

@@ -20,7 +20,7 @@ export const Login = (): JSX.Element => {
     /**
      * Custom hook that is responsible for controlling the form inputs.
      */
-    const [fields, handleFieldChange, getErrors, errors] = useFields(LOGIN_CONF);
+    const { fields, handleFieldChange, getErrors, errors } = useFields(LOGIN_CONF);
     const dispatch = useAppDispatch();
     const toast = useToast();
     /**
@@ -76,6 +76,7 @@ export const Login = (): JSX.Element => {
                                         Email
                                     </FormLabel>
                                     <Input
+                                        aria-label="email-input"
                                         isInvalid={errors.email ? true : false}
                                         errorBorderColor="crimson"
                                         type={'text'}
@@ -96,6 +97,7 @@ export const Login = (): JSX.Element => {
                                         Password
                                     </FormLabel>
                                     <Input
+                                        aria-label="password-input"
                                         isInvalid={errors.password ? true : false}
                                         errorBorderColor="crimson"
                                         type={'password'}

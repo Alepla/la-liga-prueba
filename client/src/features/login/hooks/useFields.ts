@@ -70,5 +70,5 @@ export const useFields = (initialState: LoginConf) => {
         });
     };
 
-    return [fields, handleFieldChange, getErrors, errors] as const;
+    return { fields, handleFieldChange, getErrors, errors } as const;
 };
