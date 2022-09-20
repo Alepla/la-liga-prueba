@@ -12,7 +12,7 @@ import { AuthResponse, AuthCredentials } from './loginTypes';
  * Redux-Saga middleware which receives the user's credentials and it executes the put that goes to the service and takes
  * care of it to call the API to check if they are correct.
  */
-function* fetchLoginSaga(action: PayloadAction<AuthCredentials>): Generator<CallEffect<AuthResponse> | PutEffect<AnyAction>, void, AuthResponse> {
+export function* fetchLoginSaga(action: PayloadAction<AuthCredentials>): Generator<CallEffect<AuthResponse> | PutEffect<AnyAction>, void, AuthResponse> {
     const { payload } = action;
     /**
      * You can get the token of having logged in successfully or a message and a status otherwise.

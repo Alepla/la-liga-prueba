@@ -5,12 +5,12 @@ import { store } from '../store';
  * Interceptor encargado de añadir los headers en especial el token para las peticiones a la API.
  */
 export const AuthInterceptor = (): void => {
-    const state = store.getState();
-    const {
-        login: { accessToken },
-    } = state;
     fetchIntercept.register({
         request: (url: string, config: any): Promise<any[]> | any[] => {
+            const state = store.getState();
+            const {
+                login: { accessToken },
+            } = state;
             config.headers = {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
