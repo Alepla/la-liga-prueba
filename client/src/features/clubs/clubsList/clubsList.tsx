@@ -4,6 +4,7 @@ import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormCon
 import { updateClub } from '../clubsService';
 import { StarIcon } from '@chakra-ui/icons';
 import { showResponseMessage } from '../../../app/services/responseHandler';
+import { formatDates } from '../../../app/services/formatDates';
 export interface ClubsListProps {
     clubs: ClubsItems[];
     onUpdateClub: (club: ClubsItems) => void;
@@ -43,16 +44,6 @@ export const ClubsList = (props: ClubsListProps): JSX.Element => {
         });
     };
 
-    const returnDateFormated = (date: string) => {
-        const newDate = new Date(date);
-        const dateFormated = {
-            year: newDate.getFullYear(),
-            month: newDate.getMonth(),
-            day: newDate.getDay(),
-        };
-        return dateFormated.day + '/' + dateFormated.month + '/' + dateFormated.year;
-    };
-
     return (
         <Flex flexWrap={'wrap'} justifyContent={'center'}>
             {clubs?.map((club: ClubsItems, key: number) => (
@@ -74,7 +65,7 @@ export const ClubsList = (props: ClubsListProps): JSX.Element => {
                                 <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
                                     {club.name}
                                 </Heading>
-                                <Text color={'gray.500'}>{returnDateFormated(club.foundationDate)}</Text>
+                                <Text color={'gray.500'}>{formatDates(club.foundationDate)}</Text>
                             </Stack>
 
                             <Stack direction={'row'} justify={'center'} spacing={6}>
