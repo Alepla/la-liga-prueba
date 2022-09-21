@@ -12,6 +12,7 @@ export const useFields = (initialState: LoginConf): UseFieldsReturnType => {
      */
     const [fields, setValues] = useState<LoginConf>(initialState);
     const [errors, setErrors] = useState<LoginErrors>({});
+    const [passwdVisible, setPasswdVisible] = useState<boolean>(false);
 
     /**
      *
@@ -70,5 +71,9 @@ export const useFields = (initialState: LoginConf): UseFieldsReturnType => {
         });
     };
 
-    return { setValues, fields, handleFieldChange, getErrors, errors, setErrors } as const;
+    const handleInputVisibility = (): void => {
+        setPasswdVisible(!passwdVisible);
+    };
+
+    return { fields, handleFieldChange, getErrors, errors, handleInputVisibility, passwdVisible } as const;
 };

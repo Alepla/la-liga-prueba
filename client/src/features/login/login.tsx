@@ -5,12 +5,13 @@ import { useAppDispatch } from '../../app/hooks';
 import { loginUserFetch } from './loginSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { Box, Button, Center, Flex, FormControl, FormLabel, Input, Image, FormHelperText, useToast } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, FormControl, FormLabel, Input, Image, FormHelperText, useToast, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react';
 import loginHeader from '../../assets/img/loginHeader.jpg';
 import logo from '../../assets/img/logo.png';
 import { useFields } from './hooks/useFields';
 import { LOGIN_CONF } from './loginConsts';
 import { showResponseMessage } from '../../app/utils/responseHandler/responseHandler';
+import { ViewIcon } from '@chakra-ui/icons';
 
 export const Login = (): JSX.Element => {
     /**
@@ -20,7 +21,7 @@ export const Login = (): JSX.Element => {
     /**
      * Custom hook that is responsible for controlling the form inputs.
      */
-    const { fields, handleFieldChange, getErrors, errors } = useFields(LOGIN_CONF);
+    const { fields, handleFieldChange, getErrors, errors, handleInputVisibility, passwdVisible } = useFields(LOGIN_CONF);
     const dispatch = useAppDispatch();
     const toast = useToast();
     /**
@@ -96,18 +97,21 @@ export const Login = (): JSX.Element => {
                                     <FormLabel textTransform={'uppercase'} fontSize={'xs'} color={'grey'}>
                                         Password
                                     </FormLabel>
-                                    <Input
-                                        aria-label={'Password input'}
-                                        isInvalid={errors.password ? true : false}
-                                        errorBorderColor="crimson"
-                                        type={'password'}
-                                        id={'password'}
-                                        autoComplete={'off'}
-                                        borderRadius={'none'}
-                                        borderColor={'black'}
-                                        value={fields.password.value}
-                                        onChange={handleFieldChange}
-                                    />
+                                    <InputGroup>
+                                        <Input
+                                            aria-label={'Password input'}
+                                            isInvalid={errors.password ? true : false}
+                                            errorBorderColor="crimson"
+                                            type={passwdVisible ? 'text' : 'password'}
+                                            id={'password'}
+                                            autoComplete={'off'}
+                                            borderRadius={'none'}
+                                            borderColor={'black'}
+                                            value={fields.password.value}
+                                            onChange={handleFieldChange}
+                                        />
+                                        <InputRightElement onClick={handleInputVisibility} cursor={'pointer'} children={<ViewIcon color={passwdVisible ? 'black' : 'gray.300'} />} />
+                                    </InputGroup>
                                     {errors.password && (
                                         <FormHelperText fontSize={'sm'} color={'red'}>
                                             {errors.password}

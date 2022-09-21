@@ -51,5 +51,5 @@ export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValue
             favorite: !searchValues.favorite,
         });
     };
-    return { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, setSearchValues, setLoading, loading, cache, setCache } as const;
+    return { callbackPagination, handleFieldChange, handleChangeFavorite, setLoading, searchValues, loading, cache } as const;
 };

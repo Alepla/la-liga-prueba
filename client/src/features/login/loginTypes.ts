@@ -51,8 +51,8 @@ export type ErrorResponse = {
 export interface UseFieldsReturnType {
     fields: LoginConf;
     errors: LoginErrors;
-    setValues: Dispatch<SetStateAction<LoginConf>>;
-    setErrors: Dispatch<SetStateAction<LoginErrors>>;
+    passwdVisible: boolean;
     handleFieldChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleInputVisibility: () => void;
     getErrors: () => Promise<boolean>;
 }
