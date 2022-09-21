@@ -1,5 +1,5 @@
 import { getAccessToken } from '../../app/utils/localStorage';
-import { Authentication, LoginConf } from './loginTypes';
+import { AuthenticationState, LoginConf } from './loginTypes';
 import { Headers } from '../../app/types/apiParamsTypes';
 
 export const LOGIN_CONF: LoginConf = {
@@ -19,7 +19,7 @@ export const LOGIN_CONF: LoginConf = {
     },
 };
 
-export const REDUX_INITIAL_STATE: Authentication = {
+export const REDUX_INITIAL_STATE: AuthenticationState = {
     isProcessingRequest: false,
     accessToken: getAccessToken(),
     error: {

@@ -32,8 +32,16 @@ export interface ClubsListProps {
 
 export interface UseSetSearchValuesReturnType {
     searchValues: ClubsParams;
+    loading: boolean;
+    cache: boolean;
+    setCache: Dispatch<SetStateAction<boolean>>;
+    setLoading: Dispatch<SetStateAction<boolean>>;
     setSearchValues: Dispatch<SetStateAction<ClubsParams>>;
     callbackPagination: (offset: number) => void;
     handleFieldChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleChangeFavorite: () => void;
 }
+
+export type ClubsNoResultsProps = {
+    searchInputValue: string;
+};

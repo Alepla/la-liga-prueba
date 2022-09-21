@@ -22,23 +22,28 @@ export const Pagination = (props: PaginationChildProps): JSX.Element => {
      */
     useEffect(() => {
         onClick(count);
+    }, [count]);
+
+    useEffect(() => {
         if (totalPages !== numberOfPages) {
             reset();
             setNumberOfPages(() => totalPages);
         }
-    }, [count, totalPages]);
+    }, [totalPages]);
 
     return (
         <Box>
-            <HStack spacing="14px">
-                <Button aria-label={'Button pagination left'} onClick={decrement} disabled={count === 0} borderRadius={'none'}>
-                    <ChevronLeftIcon boxSize={6} />
-                </Button>
-                <Button aria-label={'Button pagination right'} borderRadius={'none'} onClick={increment} disabled={count + 1 === totalPages || totalPages === 0}>
-                    <ChevronRightIcon boxSize={6} />
-                </Button>
-                <Box aria-label={'Pagination counter'}>{`${count + 1} / ${totalPages == 0 ? 1 : totalPages}`}</Box>
-            </HStack>
+            {totalPages !== 0 && (
+                <HStack spacing="14px">
+                    <Button aria-label={'Button pagination left'} onClick={decrement} disabled={count === 0} borderRadius={'none'}>
+                        <ChevronLeftIcon boxSize={6} />
+                    </Button>
+                    <Button aria-label={'Button pagination right'} borderRadius={'none'} onClick={increment} disabled={count + 1 === totalPages || totalPages === 0}>
+                        <ChevronRightIcon boxSize={6} />
+                    </Button>
+                    <Box aria-label={'Pagination counter'}>{`${count + 1} / ${totalPages}`}</Box>
+                </HStack>
+            )}
         </Box>
     );
 };

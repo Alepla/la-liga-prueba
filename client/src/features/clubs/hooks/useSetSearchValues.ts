@@ -4,16 +4,20 @@ import { ClubsParams, UseSetSearchValuesReturnType } from '../clubsTypes';
 /**
  *
  * @param initialState
- * @returns Custom hook para controlar el estado de los filtros de los clubs
+ * @returns Custom hook to control the status of club filters.
  */
 export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValuesReturnType => {
     const [searchValues, setSearchValues] = useState<ClubsParams>(initialState);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [cache, setCache] = useState<boolean>(true);
     /**
      *
      * @param offset
-     * Función que actualiza el offset para la paginación
+     * Function that updates the offset for pagination.
      */
     const callbackPagination = (offset: number): void => {
+        setLoading(true);
+        setCache(true);
         setSearchValues({
             ...searchValues,
             offset: offset,
@@ -23,9 +27,11 @@ export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValue
     /**
      *
      * @param event
-     * Se ejecuta cada vez que el usuario introduce algún carácter en el filtro debounce.
+     * It is executed every time the user enters a character in the debounce filter.
      */
     const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setLoading(true);
+        setCache(true);
         setSearchValues({
             ...searchValues,
             name_like: event.target.value,
@@ -33,9 +39,11 @@ export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValue
     };
 
     /**
-     * Función que es activado por el botón de favortios.
+     * Function that is activated by the favorites button.
      */
     const handleChangeFavorite = (): void => {
+        setLoading(true);
+        setCache(false);
         setSearchValues({
             ...searchValues,
             offset: 0,
@@ -43,5 +51,5 @@ export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValue
             favorite: !searchValues.favorite,
         });
     };
-    return { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, setSearchValues } as const;
+    return { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, setSearchValues, setLoading, loading, cache, setCache } as const;
 };

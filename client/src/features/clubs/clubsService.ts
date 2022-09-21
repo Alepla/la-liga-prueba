@@ -7,7 +7,7 @@ import { memoize } from '../../app/middlewares/memoize';
  * @param data
  * @returns Returns the list of user's favorite clubs.
  */
-export const getFavClubs = async (data: ClubsParams): Promise<ClubsResponse> => {
+export const getClubsWithoutCache = async (data: ClubsParams): Promise<ClubsResponse> => {
     const { offset, limit, name_like, favorite } = data;
     const fav = favorite ? `&favorite=${favorite}` : ``;
     const params = {
@@ -20,9 +20,11 @@ export const getFavClubs = async (data: ClubsParams): Promise<ClubsResponse> => 
 /**
  * Cache function to save the list of user clubs.
  */
-export const getClubsMemoize = memoize(async (offset: number, limit: number, name_like: string): Promise<ClubsResponse> => {
+export const getClubsWithCache = memoize(async (offset: number, limit: number, name_like: string, favorite: boolean): Promise<ClubsResponse> => {
+    const fav = favorite ? `&favorite=${favorite}` : ``;
+    const name = name_like ? `&name_like=${name_like}` : ``;
     const params = {
-        url: `api/clubs?offset=${offset}&limit=${limit}&name_like=${name_like}`,
+        url: `api/clubs?offset=${offset}&limit=${limit}${name}${fav}`,
         method: 'get',
     };
     return await superFetch(params);

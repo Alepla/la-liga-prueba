@@ -33,7 +33,7 @@ export type LoginErrors = {
     password?: string;
 };
 
-export type Authentication = {
+export type AuthenticationState = {
     isProcessingRequest: boolean;
     accessToken?: string;
     error: {

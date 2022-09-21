@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { AuthCredentials, ErrorResponse } from './loginTypes';
+import { AuthCredentials, AuthenticationState, ErrorResponse } from './loginTypes';
 import { REDUX_INITIAL_STATE } from './loginConsts';
 
 const initialState = REDUX_INITIAL_STATE;
@@ -17,7 +17,7 @@ export const loginSlice = createSlice({
          * @param action
          * @returns This function is in charge of communicating between the component or in this case the saga middleware with the API.
          */
-        loginUserFetch: (state, action: PayloadAction<AuthCredentials>) => {
+        loginUserFetch: (state, action: PayloadAction<AuthCredentials>): AuthenticationState => {
             return {
                 ...state,
                 isProcessingRequest: true,
@@ -29,7 +29,7 @@ export const loginSlice = createSlice({
          * @param action
          * @returns If the response is as expected, it executes the following function which saves the authentication token in the redux state.
          */
-        loginUserSuccess: (state, action: PayloadAction<string>) => {
+        loginUserSuccess: (state, action: PayloadAction<string>): AuthenticationState => {
             return {
                 ...state,
                 accessToken: action.payload,
@@ -44,7 +44,7 @@ export const loginSlice = createSlice({
          * @param action
          * @returns If the response is not the desired one, the error is saved.
          */
-        loginUserError: (state, action: PayloadAction<ErrorResponse>) => {
+        loginUserError: (state, action: PayloadAction<ErrorResponse>): AuthenticationState => {
             return {
                 ...state,
                 error: action.payload,

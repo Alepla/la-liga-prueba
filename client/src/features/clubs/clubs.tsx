@@ -1,92 +1,83 @@
 import React, { useEffect, useState } from 'react';
-import { getClubsMemoize, getFavClubs } from './clubsService';
+import { getClubsWithCache, getClubsWithoutCache } from './clubsService';
 import { Pagination } from '../../app/components/pagination/pagination';
-import { ClubsList } from './clubsList/clubsList';
-import { Box, Button, Flex, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
+import { ClubsList } from './components/clubsList/clubsList';
+import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Progress } from '@chakra-ui/react';
 import { CLUBS_SEARCH_DEFAULT_PARAMS, CLUBS_DEFAULT_RESPONSE } from './clubsConsts';
 import { useSetSearchValues } from './hooks/useSetSearchValues';
 import { ClubsItems, ClubsResponse } from './clubsTypes';
 import { Search2Icon, StarIcon } from '@chakra-ui/icons';
+import { NoClubsView } from './components/noClubsView/noClubsView';
+import { formatClubsUpdateCheck, formatClubsDeleteFromFavs } from './utils/formatClubs';
 
 export const Clubs = (): JSX.Element => {
     /**
-     * Utilizamos defaultPage para indicarle una página por defecto al componente de la paginación
-     */
-    const [defaultPage, setDefaultPage] = useState<number>(0);
-    /**
-     * clubsResponse es la respuesta de la llamada get a la api de /clubs
+     * clubsResponse is the response from the get call to the /clubs api.
      */
     const [clubsResponse, setClubsResponse] = useState<ClubsResponse>(CLUBS_DEFAULT_RESPONSE);
     /**
-     * Custom hook que utilizamos para controlar el estado de cada filtro del listado de clubs
+     * Custom hook that we use to control the state of each filter of the clubs list.
      */
-    const { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues } = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
-
+    const { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, loading, setLoading, cache } = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
     /**
-     * Hook que se triggerea cada vez que se modifique algún parametro que pueda modificar la consulta de /clubs,
-     * volviendola ha hacer. En caso de que el filtro de favoritos esté activo se hace sin caché, en caso contrario se
-     * utiliza el servicio de memoize para guardar en caché
+     * Hook that is triggered every time a parameter that can modify the /clubs query is modified, returning it has to do. If the favorites filter is active, it is done without cache, otherwise it isuses the memoize service for caching
      */
     useEffect(() => {
         const { offset, limit, name_like, favorite } = searchValues;
-        if (favorite) {
-            getFavClubs({ offset, limit, name_like, favorite }).then((res: ClubsResponse): void => {
+        if (cache) {
+            getClubsWithCache(offset, limit, name_like, favorite).then((res: ClubsResponse): void => {
                 setClubsResponse(res);
+                setLoading(false);
             });
         } else {
-            getClubsMemoize(offset, limit, name_like).then((res: ClubsResponse): void => {
+            getClubsWithoutCache({ offset, limit, name_like, favorite }).then((res: ClubsResponse): void => {
                 setClubsResponse(res);
+                setLoading(false);
             });
         }
-    }, [searchValues, defaultPage]);
-
+    }, [searchValues]);
     /**
-     * Función que se triggerea cada vez que se filtra por favoritos y setando defaultPage a 0
+     * Function that is triggered every time filtering by favorites and setting defaultPage to 0
      */
     const onClickFavorites = (): void => {
         handleChangeFavorite();
-        setDefaultPage(0);
     };
-
     /**
      *
      * @param clubUpdated
-     * Función que recibe por props el componente hijo del listado las modificaciones de cualquiera de los clubs.
-     * El funcionamiento es el siguiente, cogemos del estado los clubs, los mapeamos y buscamos el que tenga el mismo id que
-     * el club modificado, para actualizarlo, creando un nuevo array actualizado y finalmente añadiendolo al estado.
+     * Function that receives by props the child component of the list the modifications of any of the clubs and calls formatClubs utility.
      */
     const onUpdateClub = (clubUpdated: ClubsItems): void => {
-        const { results } = clubsResponse;
-        const clubs = results.map((club) => {
-            if (club.id === clubUpdated.id) {
-                club.favorite = clubUpdated.favorite;
-                return club;
-            }
-            return club;
-        });
-
-        setClubsResponse({
-            ...clubsResponse,
-            results: clubs,
-        });
+        const { favorite } = searchValues;
+        if (favorite) {
+            const { results, total }: ClubsResponse = formatClubsDeleteFromFavs(clubUpdated, clubsResponse);
+            console.log(total);
+            setClubsResponse({ ...clubsResponse, results, total });
+        } else {
+            const clubs: ClubsItems[] = formatClubsUpdateCheck(clubUpdated, clubsResponse);
+            setClubsResponse({ ...clubsResponse, results: clubs });
+        }
+        //
     };
 
     return (
-        <Box margin={'20px'}>
-            <Box>
-                <Flex justifyContent={'center'}>
-                    <InputGroup maxWidth={['66%', '50%']}>
-                        <InputLeftElement pointerEvents="none" children={<Search2Icon color="gray.300" />} />
-                        <Input aria-label={'Search club input'} borderRadius={'none'} placeholder="Search" onChange={handleFieldChange} />
-                    </InputGroup>
-                    <Button aria-label={'Favorites filter button'} onClick={onClickFavorites} borderRadius={'none'}>
-                        <StarIcon color="#ECC94B" />
-                    </Button>
-                </Flex>
+        <Box m={4}>
+            <Box h={'10px'} m={4}>
+                {loading && <Progress size={'xs'} isIndeterminate />}
             </Box>
-            <ClubsList onUpdateClub={onUpdateClub} clubs={clubsResponse.results}></ClubsList>
             <Flex justifyContent={'center'}>
-                <Pagination onClick={callbackPagination} totalPages={Math.ceil(clubsResponse.total / 6)}></Pagination>
+                <InputGroup maxWidth={['66%', '50%']}>
+                    <InputLeftElement pointerEvents={'none'} children={<Search2Icon color={'gray.300'} />} />
+                    <Input aria-label={'Search club input'} borderRadius={'none'} placeholder={'Search'} onChange={handleFieldChange} />
+                </InputGroup>
+                <Button aria-label={'Favorites filter button'} onClick={onClickFavorites} borderRadius={'none'}>
+                    <StarIcon color="#ECC94B" />
+                </Button>
+            </Flex>
+            {clubsResponse.total === 0 && !loading && <NoClubsView searchInputValue={searchValues.name_like} />}
+            {clubsResponse.total !== 0 && <ClubsList onUpdateClub={onUpdateClub} clubs={clubsResponse.results} />}
+            <Flex justifyContent={'center'}>
+                <Pagination onClick={callbackPagination} totalPages={Math.ceil(clubsResponse.total / searchValues.limit)} />
             </Flex>
         </Box>
     );
