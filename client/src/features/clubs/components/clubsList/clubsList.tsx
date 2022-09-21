@@ -1,9 +1,7 @@
 import React from 'react';
 import { ClubsItems } from '../../clubsTypes';
-import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormControl, FormLabel, useToast } from '@chakra-ui/react';
-import { updateClub } from '../../clubsService';
+import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormControl, FormLabel } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
-import { showResponseMessage } from '../../../../app/utils/responseHandler/responseHandler';
 import { formatDates } from '../../../../app/utils/formatDate/formatDates';
 import { ClubsListProps } from '../../clubsTypes';
 /**
@@ -12,33 +10,7 @@ import { ClubsListProps } from '../../clubsTypes';
  * @returns
  */
 export const ClubsList = (props: ClubsListProps): JSX.Element => {
-    let { clubs, onUpdateClub } = props;
-    const toast = useToast();
-    /**
-     *
-     * @param clubID
-     * @param isFavorite
-     * Function in charge of handling the onClick event of the add to favorite button, which makes a request to the PATCH of clubs to update the selected one.
-     */
-    const addToFavorite = (clubID: string, isFavorite: boolean): void => {
-        const body = {
-            favorite: !isFavorite,
-            clubID,
-        };
-        updateClub(body).then((clubUpdated: ClubsItems): void => {
-            onUpdateClub(clubUpdated);
-            if (clubUpdated.id) {
-                const { type, message } = showResponseMessage({ status: 200, message: 'Saved correctly' });
-                toast({
-                    title: message,
-                    status: type,
-                    duration: 9000,
-                    isClosable: true,
-                    position: 'bottom-left',
-                });
-            }
-        });
-    };
+    let { clubs, updateClub } = props;
 
     return (
         <Flex flexWrap={'wrap'} justifyContent={'center'}>
@@ -70,7 +42,7 @@ export const ClubsList = (props: ClubsListProps): JSX.Element => {
                                         <FormControl>
                                             <FormLabel fontWeight={600}>{club.favorite ? 'Remove from favorites' : 'Add to favorites'}</FormLabel>
                                             <Center>
-                                                <Switch onChange={() => addToFavorite(club.id, club.favorite)} isChecked={club.favorite ? true : false} />
+                                                <Switch onChange={() => updateClub(club.id, club.favorite)} isChecked={club.favorite ? true : false} />
                                             </Center>
                                         </FormControl>
                                     </Stack>

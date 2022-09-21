@@ -22,11 +22,17 @@ export const Clubs = (): JSX.Element => {
     /**
      *
      */
-    const { onUpdateClub } = useUpdateClub({ clubsResponse, setClubsResponse, searchValues });
+    const { onUpdateClub } = useUpdateClub({ clubsResponse, setClubsResponse, favorite: searchValues.favorite });
     /**
      *
      */
     const { fetchClubs } = useFetchClubs({ searchValues, cache, setClubsResponse, setLoading });
+    /**
+     *
+     */
+    const updateClub = (clubID: string, isFavorite: boolean) => {
+        onUpdateClub(clubID, isFavorite);
+    };
     /**
      * Hook that is triggered every time a parameter that can modify the /clubs query is modified, returning it has to do. If the favorites filter is active, it is done without cache, otherwise it isuses the memoize service for caching
      */
@@ -55,7 +61,7 @@ export const Clubs = (): JSX.Element => {
                 </Button>
             </Flex>
             {clubsResponse.total === 0 && !loading && <NoClubsView searchInputValue={searchValues.name_like} />}
-            {clubsResponse.total !== 0 && <ClubsList onUpdateClub={onUpdateClub} clubs={clubsResponse.results} />}
+            {clubsResponse.total !== 0 && <ClubsList updateClub={updateClub} clubs={clubsResponse.results} />}
             <Flex justifyContent={'center'}>
                 <Pagination onClick={callbackPagination} totalPages={Math.ceil(clubsResponse.total / searchValues.limit)} />
             </Flex>

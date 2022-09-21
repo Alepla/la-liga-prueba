@@ -27,7 +27,7 @@ export type ClubsResponse = {
 
 export type ClubsListProps = {
     clubs: ClubsItems[];
-    onUpdateClub: (club: ClubsItems) => void;
+    updateClub: (clubID: string, isFavorite: boolean) => void;
 };
 
 export type UseSetSearchValuesReturnType = {
@@ -56,11 +56,11 @@ export type UseFetchClubsReturnType = {
 };
 
 export type UseUpdateClubProps = {
-    searchValues: ClubsParams;
+    favorite: boolean;
     clubsResponse: ClubsResponse;
     setClubsResponse: React.Dispatch<React.SetStateAction<ClubsResponse>>;
 };
 
 export type UseUpdateClubReturnType = {
-    onUpdateClub: (clubUpdated: ClubsItems) => void;
+    onUpdateClub: (clubID: string, isFavorite: boolean) => void;
 };

@@ -9,7 +9,7 @@ import { useToast } from '@chakra-ui/react';
 import { showResponseMessage } from '../../../app/utils/responseHandler/responseHandler';
 
 export const useControlSubmit = (props: UseControlSubmitProps): UseControlSubmitType => {
-    const { getErrors, fields } = props;
+    const { getErrors, email, password } = props;
     /**
      * With useSelector we access the redux state to be able to use the token or the error if there has been one.
      */
@@ -26,8 +26,8 @@ export const useControlSubmit = (props: UseControlSubmitProps): UseControlSubmit
         const isValid = await getErrors();
         if (isValid) {
             const data: AuthCredentials = {
-                email: fields.email.value,
-                password: fields.password.value,
+                email: email,
+                password: password,
             };
             dispatch(loginUserFetch(data));
         }

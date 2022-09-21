@@ -24,6 +24,9 @@ export const Pagination = (props: PaginationChildProps): JSX.Element => {
         onClick(count);
     }, [count]);
 
+    /**
+     *
+     */
     useEffect((): void => {
         if (totalPages !== numberOfPages) {
             reset();

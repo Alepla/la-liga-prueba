@@ -61,5 +61,6 @@ export type UseControlSubmitType = {
 
 export type UseControlSubmitProps = {
     getErrors: () => Promise<boolean>;
-    fields: LoginConf;
+    email: string;
+    password: string;
 };
