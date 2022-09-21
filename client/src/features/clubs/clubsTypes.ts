@@ -25,12 +25,12 @@ export type ClubsResponse = {
     results: ClubsItems[];
 };
 
-export interface ClubsListProps {
+export type ClubsListProps = {
     clubs: ClubsItems[];
     onUpdateClub: (club: ClubsItems) => void;
-}
+};
 
-export interface UseSetSearchValuesReturnType {
+export type UseSetSearchValuesReturnType = {
     searchValues: ClubsParams;
     loading: boolean;
     cache: boolean;
@@ -38,8 +38,29 @@ export interface UseSetSearchValuesReturnType {
     callbackPagination: (offset: number) => void;
     handleFieldChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleChangeFavorite: () => void;
-}
+};
 
 export type ClubsNoResultsProps = {
     searchInputValue: string;
+};
+
+export type UseFetchClubsProps = {
+    searchValues: ClubsParams;
+    cache: boolean;
+    setClubsResponse: React.Dispatch<React.SetStateAction<ClubsResponse>>;
+    setLoading: Dispatch<SetStateAction<boolean>>;
+};
+
+export type UseFetchClubsReturnType = {
+    fetchClubs: () => void;
+};
+
+export type UseUpdateClubProps = {
+    searchValues: ClubsParams;
+    clubsResponse: ClubsResponse;
+    setClubsResponse: React.Dispatch<React.SetStateAction<ClubsResponse>>;
+};
+
+export type UseUpdateClubReturnType = {
+    onUpdateClub: (clubUpdated: ClubsItems) => void;
 };

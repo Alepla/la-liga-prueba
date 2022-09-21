@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { getClubsWithCache, getClubsWithoutCache } from './clubsService';
 import { Pagination } from '../../app/components/pagination/pagination';
 import { ClubsList } from './components/clubsList/clubsList';
 import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Progress } from '@chakra-ui/react';
 import { CLUBS_SEARCH_DEFAULT_PARAMS, CLUBS_DEFAULT_RESPONSE } from './clubsConsts';
 import { useSetSearchValues } from './hooks/useSetSearchValues';
-import { ClubsItems, ClubsResponse } from './clubsTypes';
+import { ClubsResponse } from './clubsTypes';
 import { Search2Icon, StarIcon } from '@chakra-ui/icons';
 import { NoClubsView } from './components/noClubsView/noClubsView';
-import { formatClubsUpdateCheck, formatClubsDeleteFromFavs } from './utils/formatClubs';
+import { useUpdateClub } from './hooks/useUpdateClub';
+import { useFetchClubs } from './hooks/useFetchClubs';
 
 export const Clubs = (): JSX.Element => {
     /**
@@ -20,43 +20,24 @@ export const Clubs = (): JSX.Element => {
      */
     const { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, loading, setLoading, cache } = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
     /**
+     *
+     */
+    const { onUpdateClub } = useUpdateClub({ clubsResponse, setClubsResponse, searchValues });
+    /**
+     *
+     */
+    const { fetchClubs } = useFetchClubs({ searchValues, cache, setClubsResponse, setLoading });
+    /**
      * Hook that is triggered every time a parameter that can modify the /clubs query is modified, returning it has to do. If the favorites filter is active, it is done without cache, otherwise it isuses the memoize service for caching
      */
     useEffect((): void => {
-        const { offset, limit, name_like, favorite } = searchValues;
-        if (cache) {
-            getClubsWithCache(offset, limit, name_like, favorite).then((res: ClubsResponse): void => {
-                setClubsResponse(res);
-                setLoading(false);
-            });
-        } else {
-            getClubsWithoutCache({ offset, limit, name_like, favorite }).then((res: ClubsResponse): void => {
-                setClubsResponse(res);
-                setLoading(false);
-            });
-        }
+        fetchClubs();
     }, [searchValues]);
     /**
      * Function that is triggered every time filtering by favorites and setting defaultPage to 0
      */
     const onClickFavorites = (): void => {
         handleChangeFavorite();
-    };
-    /**
-     *
-     * @param clubUpdated
-     * Function that receives by props the child component of the list the modifications of any of the clubs and calls formatClubs utility.
-     */
-    const onUpdateClub = (clubUpdated: ClubsItems): void => {
-        const { favorite } = searchValues;
-        if (favorite) {
-            const { results, total }: ClubsResponse = formatClubsDeleteFromFavs(clubUpdated, clubsResponse);
-            setClubsResponse({ ...clubsResponse, results, total });
-        } else {
-            const clubs: ClubsItems[] = formatClubsUpdateCheck(clubUpdated, clubsResponse);
-            setClubsResponse({ ...clubsResponse, results: clubs });
-        }
-        //
     };
 
     return (
