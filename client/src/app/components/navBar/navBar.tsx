@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, Flex, IconButton, Button, Stack, useColorModeValue, useBreakpointValue, useDisclosure, Image } from '@chakra-ui/react';
+import { Box, Flex, Button, Stack, useColorModeValue, useBreakpointValue, Image } from '@chakra-ui/react';
 import { removeTokens } from '../../services/localStorage';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import logo from '../../../assets/img/logo.png';
 
 /**
@@ -9,7 +8,6 @@ import logo from '../../../assets/img/logo.png';
  * @returns App navigation menu
  */
 export const NavBar = (): JSX.Element => {
-    const { isOpen, onToggle } = useDisclosure();
     return (
         <>
             <Box>
@@ -24,21 +22,12 @@ export const NavBar = (): JSX.Element => {
                     borderColor={useColorModeValue('gray.200', 'gray.900')}
                     align={'center'}
                 >
-                    <Flex flex={{ base: 1, md: 'auto' }} ml={{ base: -2 }} display={{ base: 'flex', md: 'none' }}>
-                        <IconButton
-                            borderRadius={'none'}
-                            onClick={onToggle}
-                            icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-                            variant={'ghost'}
-                            aria-label={'Toggle Navigation'}
-                        />
-                    </Flex>
-                    <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                        <Image boxSize={'60px'} textAlign={useBreakpointValue({ base: 'center', md: 'left' })} alt={'La Liga Logo'} src={logo} />
+                    <Flex flex={{ base: 1 }} justify={'start'}>
+                        <Image aria-label={'Logo de la liga'} boxSize={'60px'} textAlign={useBreakpointValue({ base: 'center', md: 'left' })} alt={'La Liga Logo'} src={logo} />
                     </Flex>
 
                     <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
-                        <Button type={'submit'} as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} onClick={() => removeTokens()}>
+                        <Button type={'submit'} fontSize={'sm'} fontWeight={400} variant={'link'} onClick={() => removeTokens()}>
                             Log out
                         </Button>
                     </Stack>

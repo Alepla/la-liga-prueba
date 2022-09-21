@@ -1,26 +1,14 @@
-import React from 'react';
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '../../../app/utils/test-utils';
 import { Login } from '../login';
-
-window.matchMedia = (query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // Deprecated
-    removeListener: jest.fn(), // Deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-});
 
 describe('testing login', () => {
     const setup = () => {
         const utils = renderWithProviders(<Login />);
         const emailLabel = utils.getByText(/email/i);
         const passwordLabel = utils.getByText(/password/i);
-        const emailInput = utils.getByLabelText('email-input') as HTMLInputElement;
-        const passwordInput = utils.getByLabelText('password-input') as HTMLInputElement;
+        const emailInput = utils.getByLabelText('Email input') as HTMLInputElement;
+        const passwordInput = utils.getByLabelText('Password input') as HTMLInputElement;
         const submitButton = utils.getByRole('button', { name: /Sign in/i });
         return {
             emailLabel,

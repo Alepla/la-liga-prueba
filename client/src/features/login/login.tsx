@@ -76,7 +76,7 @@ export const Login = (): JSX.Element => {
                                         Email
                                     </FormLabel>
                                     <Input
-                                        aria-label="email-input"
+                                        aria-label={'Email input'}
                                         isInvalid={errors.email ? true : false}
                                         errorBorderColor="crimson"
                                         type={'text'}
@@ -97,7 +97,7 @@ export const Login = (): JSX.Element => {
                                         Password
                                     </FormLabel>
                                     <Input
-                                        aria-label="password-input"
+                                        aria-label={'Password input'}
                                         isInvalid={errors.password ? true : false}
                                         errorBorderColor="crimson"
                                         type={'password'}

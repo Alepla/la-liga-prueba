@@ -22,3 +22,8 @@ export type ClubsResponse = {
     total: number;
     results: ClubsItems[];
 };
+
+export interface ClubsListProps {
+    clubs: ClubsItems[];
+    onUpdateClub: (club: ClubsItems) => void;
+}
