@@ -1,11 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { isAuthenticated } from '../../utils/authenticationService';
-
-export type ProtectedRouteProps = {
-    authenticationPath: string;
-    outlet: JSX.Element;
-};
+import { ProtectedRouteProps } from './protectedRouteTypes';
 
 /**
  *

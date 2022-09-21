@@ -1,5 +1,5 @@
 import { showResponseMessage } from '../responseHandler';
-import { HandlerResponse, HandlerResponseParams } from '../../types/responseHandlerControlTypes';
+import { HandlerResponse, HandlerResponseParams } from '../responseHandlerTypes';
 
 describe('showResponseMessage utility tests', () => {
     it('should return a 200 success message', async () => {

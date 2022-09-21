@@ -1,4 +1,4 @@
-import { HandlerResponse, Status, HandlerResponseParams } from '../types/responseHandlerControlTypes';
+import { HandlerResponse, Status, HandlerResponseParams } from './responseHandlerTypes';
 
 /**
  *

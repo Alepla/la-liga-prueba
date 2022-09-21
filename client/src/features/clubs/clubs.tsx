@@ -22,7 +22,7 @@ export const Clubs = (): JSX.Element => {
     /**
      * Hook that is triggered every time a parameter that can modify the /clubs query is modified, returning it has to do. If the favorites filter is active, it is done without cache, otherwise it isuses the memoize service for caching
      */
-    useEffect(() => {
+    useEffect((): void => {
         const { offset, limit, name_like, favorite } = searchValues;
         if (cache) {
             getClubsWithCache(offset, limit, name_like, favorite).then((res: ClubsResponse): void => {

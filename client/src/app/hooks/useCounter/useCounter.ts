@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UseCounterReturnType } from '../types/hooksTypes';
+import { UseCounterReturnType } from './useCounterTypes';
 
 /**
  *
@@ -9,9 +9,9 @@ import { UseCounterReturnType } from '../types/hooksTypes';
 export const useCounter = (initialValue?: number): UseCounterReturnType => {
     const [count, setCount] = useState<number>(initialValue || 0);
 
-    const decrement = (): void => setCount((prev) => prev - 1);
+    const decrement = (): void => setCount((prev): number => prev - 1);
 
-    const increment = (): void => setCount((prev) => prev + 1);
+    const increment = (): void => setCount((prev): number => prev + 1);
 
     const reset = (): void => setCount(initialValue || 0);
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, HStack } from '@chakra-ui/react';
-import { useCounter } from '../../hooks/useCounter';
+import { useCounter } from '../../hooks/useCounter/useCounter';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { PaginationChildProps } from '../../types/utilsTypes';
+import { PaginationChildProps } from './paginationTypes';
 
 /**
  *
@@ -20,14 +20,14 @@ export const Pagination = (props: PaginationChildProps): JSX.Element => {
     /**
      * Hook responsible for sending the current page to the parent component.
      */
-    useEffect(() => {
+    useEffect((): void => {
         onClick(count);
     }, [count]);
 
-    useEffect(() => {
+    useEffect((): void => {
         if (totalPages !== numberOfPages) {
             reset();
-            setNumberOfPages(() => totalPages);
+            setNumberOfPages((): number => totalPages);
         }
     }, [totalPages]);
 

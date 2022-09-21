@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { renderWithProviders } from '../../../utils/testUtils';
 import { Pagination } from '../pagination';
-import { PaginationChildProps } from '../../../types/utilsTypes';
+import { PaginationChildProps } from '../paginationTypes';
 
 describe('testing pagination', () => {
     const setup = () => {

@@ -1,6 +1,7 @@
-import { superFetch } from '../../app/utils/superFetch';
+import { superFetch } from '../../app/utils/superFetch/superFetch';
 import { AuthCredentials, AuthResponse } from './loginTypes';
 import { BASIC_HEADERS } from './loginConsts';
+import { SuperFetchParams } from '../../app/utils/superFetch/superFetchTypes';
 
 /**
  *
@@ -12,7 +13,7 @@ export const authenticate = async (data: AuthCredentials): Promise<AuthResponse>
         email: data.email,
         password: data.password,
     });
-    const params = {
+    const params: SuperFetchParams = {
         url: 'login',
         method: 'post',
         body,

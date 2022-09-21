@@ -10,7 +10,7 @@ import loginHeader from '../../assets/img/loginHeader.jpg';
 import logo from '../../assets/img/logo.png';
 import { useFields } from './hooks/useFields';
 import { LOGIN_CONF } from './loginConsts';
-import { showResponseMessage } from '../../app/utils/responseHandler';
+import { showResponseMessage } from '../../app/utils/responseHandler/responseHandler';
 
 export const Login = (): JSX.Element => {
     /**
@@ -43,7 +43,7 @@ export const Login = (): JSX.Element => {
     /**
      * Hook that redirects the user to /clubs if there is a token.
      */
-    useEffect(() => {
+    useEffect((): void => {
         if (accessToken) history.push('/clubs');
         if (error.status) {
             const { type, message } = showResponseMessage(error);

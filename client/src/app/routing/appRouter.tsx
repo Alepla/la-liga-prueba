@@ -4,7 +4,8 @@ import { Login } from '../../features/login/login';
 import { Clubs } from '../../features/clubs/clubs';
 import { NotFoundPage } from '../../features/notFoundPage/notFoundPage';
 import { history } from '../../helpers/history';
-import { ProtectedRoute, ProtectedRouteProps } from './protectedRoute/protectedRoute';
+import { ProtectedRoute } from './protectedRoute/protectedRoute';
+import { ProtectedRouteProps } from './protectedRoute/protectedRouteTypes';
 import { CustomRouter } from './customRouter/customRouter';
 
 /**

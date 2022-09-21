@@ -1,5 +1,5 @@
 import { ClubUpdateParams, ClubsParams, ClubsResponse, ClubsItems } from './clubsTypes';
-import { superFetch } from '../../app/utils/superFetch';
+import { superFetch } from '../../app/utils/superFetch/superFetch';
 import { memoize } from '../../app/middlewares/memoize';
 
 /**
