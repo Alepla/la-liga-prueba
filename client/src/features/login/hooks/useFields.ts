@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { LoginConf, LoginErrors } from '../loginTypes';
+import { LoginConf, LoginErrors, UseFieldsReturnType } from '../loginTypes';
 
 /**
  *
  * @param initialState
  * @returns Custom hook in charge of the actions of the form.
  */
-export const useFields = (initialState: LoginConf) => {
+export const useFields = (initialState: LoginConf): UseFieldsReturnType => {
     /**
      * The form inputs are saved in the state.
      */
@@ -70,5 +70,5 @@ export const useFields = (initialState: LoginConf) => {
         });
     };
 
-    return { fields, handleFieldChange, getErrors, errors } as const;
+    return { setValues, fields, handleFieldChange, getErrors, errors, setErrors } as const;
 };
