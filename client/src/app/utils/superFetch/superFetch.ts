@@ -9,7 +9,7 @@ import { SuperFetchParams } from './superFetchTypes';
  * @returns Function in charge of controlling the responses of the API.
  * The response is of type any since it is used in all requests to the API by the APP.
  */
-export const handleResponse = async (response: any) => {
+export const handleResponse = async (response: Response): Promise<object | Error> => {
     const isJson = response.headers.get('content-type')?.includes('application/json');
     const data = isJson ? await response.json() : null;
     /**
@@ -30,7 +30,7 @@ export const handleResponse = async (response: any) => {
  * @param params
  * @returns SuperFetch function in charge of calling the API to log in the user.
  */
-export const superFetch = async (params: SuperFetchParams) => {
+export const superFetch = async <T>(params: SuperFetchParams): Promise<T> => {
     const { url, method, body, headers } = params;
     if (!headers) AuthInterceptor();
     return await fetch(env_var.BASE_URL + url, { method, body, headers })

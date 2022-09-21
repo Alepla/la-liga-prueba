@@ -1,12 +1,13 @@
 import fetchIntercept, { FetchInterceptorResponse } from 'fetch-intercept';
 import { store } from '../store';
+import { RequestConfig } from '../types/apiParamsTypes';
 
 /**
  * Interceptor encargado de añadir los headers en especial el token para las peticiones a la API.
  */
 export const AuthInterceptor = (): void => {
     fetchIntercept.register({
-        request: (url: string, config: any): Promise<any[]> | any[] => {
+        request: (url: string, config: RequestConfig): Promise<unknown[]> | unknown[] => {
             const state = store.getState();
             const {
                 login: { accessToken },
@@ -20,7 +21,7 @@ export const AuthInterceptor = (): void => {
             return [url, config];
         },
 
-        requestError: (error: any): Promise<any> => {
+        requestError: (error: Error): Promise<Error> => {
             return Promise.reject(error);
         },
 
@@ -28,7 +29,7 @@ export const AuthInterceptor = (): void => {
             return response;
         },
 
-        responseError: (error: any): Promise<any> => {
+        responseError: (error: Error): Promise<Error> => {
             return Promise.reject(error);
         },
     });

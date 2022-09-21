@@ -27,7 +27,7 @@ export const Pagination = (props: PaginationChildProps): JSX.Element => {
     useEffect((): void => {
         if (totalPages !== numberOfPages) {
             reset();
-            setNumberOfPages((): number => totalPages);
+            setNumberOfPages(totalPages);
         }
     }, [totalPages]);
 
