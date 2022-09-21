@@ -27,7 +27,7 @@ export const handleResponse = async (response: any) => {
 };
 /**
  *
- * @param data
+ * @param params
  * @returns SuperFetch function in charge of calling the API to log in the user.
  */
 export const superFetch = async (params: SuperFetchParams) => {
