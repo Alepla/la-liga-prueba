@@ -12,5 +12,7 @@ services:
     image: server_la_liga
     env_file: ./server/docker-compose.env
     ports:
-      - 8001:8000
+      - 4000:4000
     restart: unless-stopped
+    links:
+      - app

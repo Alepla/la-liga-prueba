@@ -1,4 +1,21 @@
+/**
+ *
+ * @param date
+ * @returns This utility takes a string date and formats it
+ */
 export const formatDates = (date: string) => {
     const newDate = new Date(date);
-    return newDate.getDay() + '/' + newDate.getMonth() + '/' + newDate.getFullYear();
+    if (isValidDate(newDate)) return newDate.getDay() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getFullYear();
+    else {
+        return 'Invalid Date';
+    }
+};
+
+/**
+ *
+ * @param date
+ * @returns Check if its a valid date
+ */
+const isValidDate = (date: Date) => {
+    return date instanceof Date && Number(!isNaN(Number(date)));
 };
