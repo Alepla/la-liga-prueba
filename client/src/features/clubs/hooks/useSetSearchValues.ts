@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { ClubsParams } from '../clubsTypes';
+import { ClubsParams, UseSetSearchValuesReturnType } from '../clubsTypes';
 
 /**
  *
  * @param initialState
  * @returns Custom hook para controlar el estado de los filtros de los clubs
  */
-export const useSetSearchValues = (initialState: ClubsParams) => {
+export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValuesReturnType => {
     const [searchValues, setSearchValues] = useState<ClubsParams>(initialState);
     /**
      *
@@ -43,5 +43,5 @@ export const useSetSearchValues = (initialState: ClubsParams) => {
             favorite: !searchValues.favorite,
         });
     };
-    return [callbackPagination, handleFieldChange, handleChangeFavorite, searchValues] as const;
+    return { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, setSearchValues } as const;
 };

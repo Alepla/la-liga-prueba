@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export type ClubsParams = {
     offset: number;
     limit: number;
@@ -26,4 +28,12 @@ export type ClubsResponse = {
 export interface ClubsListProps {
     clubs: ClubsItems[];
     onUpdateClub: (club: ClubsItems) => void;
+}
+
+export interface UseSetSearchValuesReturnType {
+    searchValues: ClubsParams;
+    setSearchValues: Dispatch<SetStateAction<ClubsParams>>;
+    callbackPagination: (offset: number) => void;
+    handleFieldChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleChangeFavorite: () => void;
 }

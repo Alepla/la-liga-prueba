@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getClubsMemoize, getFavClubs } from './clubsService';
 import { Pagination } from '../../app/components/pagination/pagination';
 import { ClubsList } from './clubsList/clubsList';
-import { Box, Button, Flex, Input, InputGroup, InputLeftAddon, InputLeftElement } from '@chakra-ui/react';
+import { Box, Button, Flex, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { CLUBS_SEARCH_DEFAULT_PARAMS, CLUBS_DEFAULT_RESPONSE } from './clubsConsts';
 import { useSetSearchValues } from './hooks/useSetSearchValues';
 import { ClubsItems, ClubsResponse } from './clubsTypes';
@@ -20,7 +20,7 @@ export const Clubs = (): JSX.Element => {
     /**
      * Custom hook que utilizamos para controlar el estado de cada filtro del listado de clubs
      */
-    const [callbackPagination, handleFieldChange, handleChangeFavorite, searchValues] = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
+    const { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues } = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
 
     /**
      * Hook que se triggerea cada vez que se modifique algún parametro que pueda modificar la consulta de /clubs,
@@ -77,9 +77,9 @@ export const Clubs = (): JSX.Element => {
                 <Flex justifyContent={'center'}>
                     <InputGroup maxWidth={['66%', '50%']}>
                         <InputLeftElement pointerEvents="none" children={<Search2Icon color="gray.300" />} />
-                        <Input borderRadius={'none'} placeholder="Search" onChange={handleFieldChange} />
+                        <Input aria-label={'Search club input'} borderRadius={'none'} placeholder="Search" onChange={handleFieldChange} />
                     </InputGroup>
-                    <Button onClick={onClickFavorites} borderRadius={'none'}>
+                    <Button aria-label={'Favorites filter button'} onClick={onClickFavorites} borderRadius={'none'}>
                         <StarIcon color="#ECC94B" />
                     </Button>
                 </Flex>

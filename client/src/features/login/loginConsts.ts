@@ -1,8 +1,8 @@
 import { getAccessToken } from '../../app/utils/localStorage';
-import { Authentication } from './loginTypes';
+import { Authentication, LoginConf } from './loginTypes';
 import { Headers } from '../../app/types/apiParamsTypes';
 
-export const LOGIN_CONF = {
+export const LOGIN_CONF: LoginConf = {
     email: {
         value: '',
         validations: {
