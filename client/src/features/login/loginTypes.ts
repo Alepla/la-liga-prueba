@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export type AuthCredentials = {
     email: string;
     password: string;
@@ -48,11 +46,20 @@ export type ErrorResponse = {
     status: number;
 };
 
-export interface UseFieldsReturnType {
+export type UseFieldsReturnType = {
     fields: LoginConf;
     errors: LoginErrors;
     passwdVisible: boolean;
     handleFieldChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleInputVisibility: () => void;
     getErrors: () => Promise<boolean>;
-}
+};
+
+export type UseControlSubmitType = {
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+};
+
+export type UseControlSubmitProps = {
+    getErrors: () => Promise<boolean>;
+    fields: LoginConf;
+};

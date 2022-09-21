@@ -51,7 +51,6 @@ export const Clubs = (): JSX.Element => {
         const { favorite } = searchValues;
         if (favorite) {
             const { results, total }: ClubsResponse = formatClubsDeleteFromFavs(clubUpdated, clubsResponse);
-            console.log(total);
             setClubsResponse({ ...clubsResponse, results, total });
         } else {
             const clubs: ClubsItems[] = formatClubsUpdateCheck(clubUpdated, clubsResponse);
