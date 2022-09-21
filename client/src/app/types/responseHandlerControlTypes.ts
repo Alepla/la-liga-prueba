@@ -1,9 +1,9 @@
-export type Error = {
+export type HandlerResponseParams = {
     message: string;
     status: number | null;
 };
 
-export type ErrorHandlerResponse = {
+export type HandlerResponse = {
     message: string;
     type: Status;
 };
