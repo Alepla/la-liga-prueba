@@ -10,7 +10,7 @@ import loginHeader from '../../assets/img/loginHeader.jpg';
 import logo from '../../assets/img/logo.png';
 import { useFields } from './hooks/useFields';
 import { LOGIN_CONF } from './loginConsts';
-import { showResponseMessage } from '../../app/services/responseHandler';
+import { showResponseMessage } from '../../app/utils/responseHandler';
 
 export const Login = (): JSX.Element => {
     /**

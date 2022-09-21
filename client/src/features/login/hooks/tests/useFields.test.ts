@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
-import { useFields } from '../hooks/useFields';
-import { LOGIN_CONF } from '../loginConsts';
+import { useFields } from '../useFields';
+import { LOGIN_CONF } from '../../loginConsts';
 
 describe('testing useFields custom hook', () => {
     it('getErrors return that email and password are required', async () => {

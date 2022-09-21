@@ -2,7 +2,7 @@ import { call, takeEvery, put, CallEffect, PutEffect } from 'redux-saga/effects'
 import { AnyAction, PayloadAction } from '@reduxjs/toolkit';
 import { loginUserSuccess, loginUserError } from './loginSlice';
 import { authenticate } from './loginService';
-import { setTokens } from '../../app/services/localStorage';
+import { setTokens } from '../../app/utils/localStorage';
 import { history } from '../../helpers/history';
 import { AuthResponse, AuthCredentials } from './loginTypes';
 

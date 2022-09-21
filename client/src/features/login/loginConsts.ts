@@ -1,4 +1,4 @@
-import { getAccessToken } from '../../app/services/localStorage';
+import { getAccessToken } from '../../app/utils/localStorage';
 import { Authentication } from './loginTypes';
 import { Headers } from '../../app/types/apiParamsTypes';
 

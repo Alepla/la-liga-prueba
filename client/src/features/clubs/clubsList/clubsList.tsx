@@ -3,7 +3,7 @@ import { ClubsItems } from '../clubsTypes';
 import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { updateClub } from '../clubsService';
 import { StarIcon } from '@chakra-ui/icons';
-import { showResponseMessage } from '../../../app/services/responseHandler';
+import { showResponseMessage } from '../../../app/utils/responseHandler';
 import { formatDates } from '../../../app/utils/formatDates';
 import { ClubsListProps } from '../clubsTypes';
 /**

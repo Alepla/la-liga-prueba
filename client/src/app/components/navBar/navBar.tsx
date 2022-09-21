@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex, Button, Stack, useColorModeValue, useBreakpointValue, Image } from '@chakra-ui/react';
-import { removeTokens } from '../../services/localStorage';
+import { removeTokens } from '../../utils/localStorage';
 import logo from '../../../assets/img/logo.png';
 
 /**

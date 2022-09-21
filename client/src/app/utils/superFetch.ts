@@ -1,5 +1,5 @@
 import { AuthInterceptor } from '../middlewares/authInterceptor';
-import { removeTokens } from '../services/localStorage';
+import { removeTokens } from './localStorage';
 import { env_var } from '../../config/env';
 import { SuperFetchParams } from '../types/apiParamsTypes';
 

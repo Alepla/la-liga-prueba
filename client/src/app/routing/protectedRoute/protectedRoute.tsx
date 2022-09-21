@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { isAuthenticated } from '../../services/authenticationService';
+import { isAuthenticated } from '../../utils/authenticationService';
 
 export type ProtectedRouteProps = {
     authenticationPath: string;

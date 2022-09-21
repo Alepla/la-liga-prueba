@@ -1,5 +1,5 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { renderWithProviders } from '../../../app/utils/test-utils';
+import { renderWithProviders } from '../../../app/utils/testUtils';
 import { Login } from '../login';
 
 describe('testing login', () => {
