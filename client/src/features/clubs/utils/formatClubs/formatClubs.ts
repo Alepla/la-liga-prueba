@@ -1,13 +1,12 @@
-import { ClubsItems, ClubsResponse } from '../clubsTypes';
+import { ClubsItems, ClubsResponse } from '../../clubsTypes';
 /**
  *
  * @param clubUpdated
  * @param clubsResponse
  *
  */
-export const formatClubsUpdateCheck = (clubUpdated: ClubsItems, clubsResponse: ClubsResponse): ClubsItems[] => {
-    const { results } = clubsResponse;
-    return results.map((club: ClubsItems): ClubsItems => {
+export const formatClubsUpdateCheck = (clubUpdated: ClubsItems, clubsResponse: ClubsItems[]): ClubsItems[] => {
+    return clubsResponse.map((club: ClubsItems): ClubsItems => {
         if (club.id === clubUpdated.id) {
             club.favorite = clubUpdated.favorite;
             return club;

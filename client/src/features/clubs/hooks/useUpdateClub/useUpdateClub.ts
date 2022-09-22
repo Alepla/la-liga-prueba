@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import { showResponseMessage } from '../../../../app/utils/responseHandler/responseHandler';
 import { updateClub } from '../../clubsService';
 import { ClubsItems, ClubsResponse } from '../../clubsTypes';
-import { formatClubsDeleteFromFavs, formatClubsUpdateCheck } from '../../utils/formatClubs';
+import { formatClubsDeleteFromFavs, formatClubsUpdateCheck } from '../../utils/formatClubs/formatClubs';
 import { UseUpdateClubProps, UseUpdateClubReturnType } from './useUpdateClubTypes';
 
 export const useUpdateClub = (props: UseUpdateClubProps): UseUpdateClubReturnType => {
@@ -31,7 +31,7 @@ export const useUpdateClub = (props: UseUpdateClubProps): UseUpdateClubReturnTyp
                 const { results, total }: ClubsResponse = formatClubsDeleteFromFavs(clubUpdated, clubsResponse);
                 setClubsResponse({ ...clubsResponse, results, total });
             } else {
-                const clubs: ClubsItems[] = formatClubsUpdateCheck(clubUpdated, clubsResponse);
+                const clubs: ClubsItems[] = formatClubsUpdateCheck(clubUpdated, clubsResponse.results);
                 setClubsResponse({ ...clubsResponse, results: clubs });
             }
         });
