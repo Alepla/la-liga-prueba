@@ -57,24 +57,39 @@ yarn && yarn start
 
 **_ Puedes documentar aquí la memoria de tu prueba _**
 
-Para documentar la memoria de la prueba he decidido utilizar un tablero de trello, donde he ido separando cada una de las tareas y posteriormente documentado el proceso de cada una de ellas: https://trello.com/b/hVER0MrX/la-liga-app
+> Para documentar la memoria de la prueba he decidido utilizar un tablero de trello, donde he ido separando cada una de las tareas y posteriormente documentado el proceso de cada una de ellas, recomiendo echarle un vistazo ya que ahí explico el porque de muchas de mis decisiones: https://trello.com/b/hVER0MrX/la-liga-app
 
-Endpoint live demo: http://51.178.18.68:3000/
+> Endpoint live demo: http://51.178.18.68:3000/
 
-De todas formas voy a resumir aquí algunas cosas interesantes a destacar:
+Algunas cosas interesantes a destacar:
 
--Memoize: Se ha decidido utilizar este middleware para cachear la información de las peticiones repetidas y así minimizarlas al máximo.
+**Memoize:**
 
--AuthInterceptor: Que utiliza la libreria de fetch-intercept, para que la gestión del token y los headers se haga desde un único sitio de la aplicación.
+Se ha decidido utilizar este middleware para cachear la información de las peticiones repetidas y así minimizarlas al máximo.
 
--SuperFetch: He unificado que todas las peticiones de la app passen per esta única función fetch, para así utilizar la url y el interceptor desde un único sitio, y esta al mismo tiempo se encarga de gestionar la respuesta.
+**AuthInterceptor:**
 
--Docker: He creado los Dockerfile de la app y de la api para así poder hacer deploy en un servidor y tener una live demo.
+Que utiliza la libreria de fetch-intercept, para que la gestión del token y los headers se haga desde un único sitio de la aplicación.
 
--Single responsibility: Como se podrá ver la mayoría de la app cumple con este principio, pero en el componente de paginación he creido que aplicarlo para un único useEffect sería contraproducente.
+**SuperFetch:**
 
--Estructura del proyecto:
+He unificado que todas las peticiones de la app passen per esta única función fetch, para así utilizar la url y el interceptor desde un único sitio, y esta al mismo tiempo se encarga de gestionar la respuesta.
 
+**Docker:**
+
+He creado los Dockerfile de la app y de la api para así poder hacer deploy en un servidor y tener una live demo.
+
+**Single responsibility:**
+
+Como se podrá ver la mayoría de la app cumple con este principio, pero en el componente de paginación he creido que aplicarlo para un único useEffect sería contraproducente.
+
+**Testing:**
+
+El objetivo es superar el 75% de coverage, si el tiempo lo permite, de momento ronda el 60%.
+
+**Estructura del cliente**
+
+```text
 src/
 |-- app/ ----------------------->Contiene funcionalidades que se utilizan en toda la app
 | |-- components/ -------------->Contiene componentes que se pueden reutilziar en varias vistas
@@ -141,3 +156,4 @@ src/
 | |-- history.ts
 |-- App.tsx
 |-- index.tsx
+```
