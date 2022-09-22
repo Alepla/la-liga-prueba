@@ -42,4 +42,12 @@ describe('testing useFields custom hook', () => {
         });
         expect(result.current.fields.password.value).toBe(event.target.value);
     });
+
+    it('handleInputVisibility should be set password true', async () => {
+        const { result } = renderHook(() => useFields(LOGIN_CONF));
+        act(() => {
+            result.current.handleInputVisibility();
+        });
+        expect(result.current.passwdVisible).toBe(true);
+    });
 });

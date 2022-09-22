@@ -4,6 +4,11 @@ import { CLUBS_SEARCH_DEFAULT_PARAMS } from '../../../clubsConsts';
 import { ChangeEvent } from 'react';
 
 describe('testing useSetSearchValues custom hook', () => {
+    const event = {
+        target: {
+            value: 'test',
+        },
+    } as ChangeEvent<HTMLInputElement>;
     it('after trigger callbackPagination offset should be 2', async () => {
         const { result } = renderHook(() => useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS));
 
@@ -15,11 +20,6 @@ describe('testing useSetSearchValues custom hook', () => {
     });
     it('after trigger handleFieldChange name_like should be test', async () => {
         const { result } = renderHook(() => useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS));
-        const event = {
-            target: {
-                value: 'test',
-            },
-        } as ChangeEvent<HTMLInputElement>;
         expect(result.current.searchValues.name_like).toBe('');
         act(() => {
             result.current.handleFieldChange(event);
@@ -43,5 +43,18 @@ describe('testing useSetSearchValues custom hook', () => {
             result.current.handleChangeFavorite();
         });
         expect(result.current.searchValues.offset).toBe(0);
+    });
+    it('after trigger resetSeatchValues name_like should return to default state', async () => {
+        const { result } = renderHook(() => useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS));
+
+        expect(result.current.searchValues.name_like).toBe('');
+        act(() => {
+            result.current.handleFieldChange(event);
+        });
+        expect(result.current.searchValues.name_like).toBe(event.target.value);
+        act(() => {
+            result.current.resetSeatchValues();
+        });
+        expect(result.current.searchValues.name_like).toBe('');
     });
 });
