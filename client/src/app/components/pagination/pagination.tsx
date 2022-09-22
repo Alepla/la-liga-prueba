@@ -17,15 +17,21 @@ export const Pagination = (props: PaginationChildProps): JSX.Element => {
     const { decrement, increment, count, reset } = useCounter(0);
 
     /**
-     * Hook responsible for sending the current page to the parent component and check if the total number of pages has changed to reset the counter.
+     * Hook responsible for sending the current page to the parent component
      */
     useEffect((): void => {
         onClick(count);
+    }, [count]);
+
+    /**
+     * Hook responsible of check if the total number of pages has changed to reset the counter.
+     */
+    useEffect((): void => {
         if (totalPages !== numberOfPages) {
             reset();
             setNumberOfPages(totalPages);
         }
-    }, [count, totalPages]);
+    }, [totalPages]);
 
     return (
         <Box>
