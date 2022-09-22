@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { useSetSearchValues } from '../useSetSearchValues';
-import { CLUBS_SEARCH_DEFAULT_PARAMS } from '../../clubsConsts';
+import { CLUBS_SEARCH_DEFAULT_PARAMS } from '../../../clubsConsts';
+import { ChangeEvent } from 'react';
 
 describe('testing useSetSearchValues custom hook', () => {
     it('after trigger callbackPagination offset should be 2', async () => {
@@ -18,7 +19,7 @@ describe('testing useSetSearchValues custom hook', () => {
             target: {
                 value: 'test',
             },
-        } as React.ChangeEvent<HTMLInputElement>;
+        } as ChangeEvent<HTMLInputElement>;
         expect(result.current.searchValues.name_like).toBe('');
         act(() => {
             result.current.handleFieldChange(event);

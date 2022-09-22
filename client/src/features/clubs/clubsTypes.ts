@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 export type ClubsParams = {
     offset: number;
@@ -31,37 +31,6 @@ export type ClubsListProps = {
     updateClub: (clubID: string, isFavorite: boolean) => void;
 };
 
-export type UseSetSearchValuesReturnType = {
-    searchValues: ClubsParams;
-    loading: boolean;
-    cache: boolean;
-    setLoading: Dispatch<SetStateAction<boolean>>;
-    callbackPagination: (offset: number) => void;
-    handleFieldChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    handleChangeFavorite: () => void;
-};
-
 export type ClubsNoResultsProps = {
     searchInputValue: string;
-};
-
-export type UseFetchClubsProps = {
-    searchValues: ClubsParams;
-    cache: boolean;
-    setClubsResponse: React.Dispatch<React.SetStateAction<ClubsResponse>>;
-    setLoading: Dispatch<SetStateAction<boolean>>;
-};
-
-export type UseFetchClubsReturnType = {
-    fetchClubs: () => void;
-};
-
-export type UseUpdateClubProps = {
-    favorite: boolean;
-    clubsResponse: ClubsResponse;
-    setClubsResponse: React.Dispatch<React.SetStateAction<ClubsResponse>>;
-};
-
-export type UseUpdateClubReturnType = {
-    onUpdateClub: (clubID: string, isFavorite: boolean) => void;
 };

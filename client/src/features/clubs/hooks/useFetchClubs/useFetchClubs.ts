@@ -1,7 +1,8 @@
 import { useToast } from '@chakra-ui/react';
-import { showResponseMessage } from '../../../app/utils/responseHandler/responseHandler';
-import { getClubsWithCache, getClubsWithoutCache } from '../clubsService';
-import { ClubsResponse, UseFetchClubsProps, UseFetchClubsReturnType } from '../clubsTypes';
+import { showResponseMessage } from '../../../../app/utils/responseHandler/responseHandler';
+import { getClubsWithCache, getClubsWithoutCache } from '../../clubsService';
+import { ClubsResponse } from '../../clubsTypes';
+import { UseFetchClubsProps, UseFetchClubsReturnType } from './useFetchClubsTypes';
 
 export const useFetchClubs = (props: UseFetchClubsProps): UseFetchClubsReturnType => {
     const { searchValues, cache, setClubsResponse, setLoading } = props;

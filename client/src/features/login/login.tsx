@@ -2,10 +2,10 @@ import React from 'react';
 import { Box, Button, Center, Flex, FormControl, FormLabel, Input, Image, FormHelperText, InputGroup, InputRightElement } from '@chakra-ui/react';
 import loginHeader from '../../assets/img/loginHeader.jpg';
 import logo from '../../assets/img/logo.png';
-import { useFields } from './hooks/useFields';
+import { useFields } from './hooks/useFilelds/useFields';
 import { LOGIN_CONF } from './loginConsts';
 import { ViewIcon } from '@chakra-ui/icons';
-import { useControlSubmit } from './hooks/useControlSubmit';
+import { useControlSubmit } from './hooks/useControlSubmit/useControlSubmit';
 
 export const Login = (): JSX.Element => {
     /**

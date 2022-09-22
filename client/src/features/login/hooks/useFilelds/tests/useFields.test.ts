@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { useFields } from '../useFields';
-import { LOGIN_CONF } from '../../loginConsts';
+import { LOGIN_CONF } from '../../../loginConsts';
+import { ChangeEvent } from 'react';
 
 describe('testing useFields custom hook', () => {
     it('getErrors return that email and password are required', async () => {
@@ -20,7 +21,7 @@ describe('testing useFields custom hook', () => {
                 id: 'email',
                 value: 'email@test.com',
             },
-        } as React.ChangeEvent<HTMLInputElement>;
+        } as ChangeEvent<HTMLInputElement>;
         act(() => {
             result.current.handleFieldChange(event);
         });
@@ -35,7 +36,7 @@ describe('testing useFields custom hook', () => {
                 id: 'password',
                 value: 'password',
             },
-        } as React.ChangeEvent<HTMLInputElement>;
+        } as ChangeEvent<HTMLInputElement>;
         act(() => {
             result.current.handleFieldChange(event);
         });

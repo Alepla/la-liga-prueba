@@ -1,8 +1,9 @@
 import { useToast } from '@chakra-ui/react';
-import { showResponseMessage } from '../../../app/utils/responseHandler/responseHandler';
-import { updateClub } from '../clubsService';
-import { ClubsItems, ClubsResponse, UseUpdateClubProps, UseUpdateClubReturnType } from '../clubsTypes';
-import { formatClubsDeleteFromFavs, formatClubsUpdateCheck } from '../utils/formatClubs';
+import { showResponseMessage } from '../../../../app/utils/responseHandler/responseHandler';
+import { updateClub } from '../../clubsService';
+import { ClubsItems, ClubsResponse } from '../../clubsTypes';
+import { formatClubsDeleteFromFavs, formatClubsUpdateCheck } from '../../utils/formatClubs';
+import { UseUpdateClubProps, UseUpdateClubReturnType } from './useUpdateClubTypes';
 
 export const useUpdateClub = (props: UseUpdateClubProps): UseUpdateClubReturnType => {
     const { favorite, clubsResponse, setClubsResponse } = props;

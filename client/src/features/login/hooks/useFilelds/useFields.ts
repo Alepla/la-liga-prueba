@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { LoginConf, LoginErrors, UseFieldsReturnType } from '../loginTypes';
-
+import React, { ChangeEvent, useState } from 'react';
+import { LoginConf, LoginErrors } from '../../loginTypes';
+import { UseFieldsReturnType } from './useFieldsTypes';
 /**
  *
  * @param initialState
@@ -58,7 +58,7 @@ export const useFields = (initialState: LoginConf): UseFieldsReturnType => {
      * @param event
      * Function responsible for updating the value of the form inputs.
      */
-    const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleFieldChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const updatedField = {
             [(event.target as HTMLInputElement).id]: {
                 ...fields[(event.target as HTMLInputElement).id as keyof typeof fields],

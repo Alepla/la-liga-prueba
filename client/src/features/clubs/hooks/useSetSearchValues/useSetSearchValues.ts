@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { ClubsParams, UseSetSearchValuesReturnType } from '../clubsTypes';
+import React, { ChangeEvent, useState } from 'react';
+import { ClubsParams } from '../../clubsTypes';
+import { UseSetSearchValuesReturnType } from './useSetSearchValuesTypes';
 
 /**
  *
@@ -29,7 +30,7 @@ export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValue
      * @param event
      * It is executed every time the user enters a character in the debounce filter.
      */
-    const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleFieldChange = (event: ChangeEvent<HTMLInputElement>): void => {
         setLoading(true);
         setCache(true);
         setSearchValues({

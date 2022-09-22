@@ -3,12 +3,12 @@ import { Pagination } from '../../app/components/pagination/pagination';
 import { ClubsList } from './components/clubsList/clubsList';
 import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Progress } from '@chakra-ui/react';
 import { CLUBS_SEARCH_DEFAULT_PARAMS, CLUBS_DEFAULT_RESPONSE } from './clubsConsts';
-import { useSetSearchValues } from './hooks/useSetSearchValues';
+import { useSetSearchValues } from './hooks/useSetSearchValues/useSetSearchValues';
 import { ClubsResponse } from './clubsTypes';
 import { Search2Icon, StarIcon } from '@chakra-ui/icons';
 import { NoClubsView } from './components/noClubsView/noClubsView';
-import { useUpdateClub } from './hooks/useUpdateClub';
-import { useFetchClubs } from './hooks/useFetchClubs';
+import { useUpdateClub } from './hooks/useUpdateClub/useUpdateClub';
+import { useFetchClubs } from './hooks/useFetchClubs/useFetchClubs';
 
 export const Clubs = (): JSX.Element => {
     /**
