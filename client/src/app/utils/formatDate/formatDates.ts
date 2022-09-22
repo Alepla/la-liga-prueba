@@ -1,13 +1,26 @@
 /**
  *
  * @param date
- * @returns This utility takes a string date and formats it
+ * @returns This utility takes a string date and giving it back the full date formated
  */
 export const formatDates = (date: string): string => {
     const newDate = new Date(date);
     if (isValidDate(newDate)) return newDate.getDay() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getFullYear();
     else {
         return 'Invalid Date';
+    }
+};
+
+/**
+ *
+ * @param date
+ * @returns This utility takes a string date and giving it back the year formated
+ */
+export const getYear = (date: string): string => {
+    const newDate = new Date(date);
+    if (isValidDate(newDate)) return newDate.getFullYear().toString();
+    else {
+        return '*';
     }
 };
 

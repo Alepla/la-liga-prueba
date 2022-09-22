@@ -2,7 +2,7 @@ import React from 'react';
 import { ClubsItems } from '../../clubsTypes';
 import { Box, Flex, Image, Center, Avatar, Heading, Stack, Text, Switch, FormControl, FormLabel } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
-import { formatDates } from '../../../../app/utils/formatDate/formatDates';
+import { getYear } from '../../../../app/utils/formatDate/formatDates';
 import { ClubsListProps } from '../../clubsTypes';
 /**
  *
@@ -36,7 +36,7 @@ export const ClubsList = (props: ClubsListProps): JSX.Element => {
                                         {club.name}
                                     </Heading>
                                     <Text color={'gray.500'} aria-label={'Club date'}>
-                                        {formatDates(club.foundationDate)}
+                                        Founded in {getYear(club.foundationDate)}
                                     </Text>
                                 </Stack>
 
