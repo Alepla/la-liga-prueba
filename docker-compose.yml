@@ -2,12 +2,12 @@ version: "3"
 services:
   app:
     image: client_la_liga
+    env_file: ./client/docker-compose.env
     ports:
       - 3000:3000
     restart: unless-stopped
     links:
       - api
-    command: yarn start
   api:
     image: server_la_liga
     env_file: ./server/docker-compose.env
