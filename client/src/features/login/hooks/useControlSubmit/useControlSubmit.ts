@@ -35,14 +35,17 @@ export const useControlSubmit = (props: UseControlSubmitProps): UseControlSubmit
     };
 
     /**
-     * Hook that redirects the user to /clubs if there is a token.
+     * Hook that redirects the user to /clubs if there is a token or show the toast error.
      */
     useEffect((): void => {
         if (accessToken) history.push('/clubs');
         if (error.status) showToast();
     }, [accessToken, error]);
 
-    const showToast = () => {
+    /**
+     * Function in charge of teaching the toast in case the login has gone wrong.
+     */
+    const showToast = (): void => {
         const { type, resMessage } = showResponseMessage(error);
         toast({
             title: resMessage,

@@ -71,6 +71,9 @@ export const useFields = (initialState: LoginConf): UseFieldsReturnType => {
         });
     };
 
+    /**
+     * Function responsible for displaying the password.
+     */
     const handleInputVisibility = (): void => {
         setPasswdVisible(!passwdVisible);
     };

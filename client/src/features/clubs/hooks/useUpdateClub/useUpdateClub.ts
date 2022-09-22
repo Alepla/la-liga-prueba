@@ -10,16 +10,23 @@ export const useUpdateClub = (props: UseUpdateClubProps): UseUpdateClubReturnTyp
     const toast = useToast();
     /**
      *
-     * @param clubUpdated
-     * Function that receives by props the child component of the list the modifications of any of the clubs and calls formatClubs utility.
+     * @param clubID
+     * @param isFavorite
+     * Function that receives the id of the club and the status of favorite.
      */
     const onUpdateClub = (clubID: string, isFavorite: boolean): void => {
         const body = {
             favorite: !isFavorite,
             clubID,
         };
+        /**
+         * The service in charge of updating the club is called.
+         */
         updateClub(body).then((clubUpdated: ClubsItems): void => {
             if (clubUpdated.id) showToast();
+            /**
+             * Si el filtros de favoritos esta activado se hace elimina del array de clubs en caso contrario solo se actualiza el valor de favorito.
+             */
             if (favorite) {
                 const { results, total }: ClubsResponse = formatClubsDeleteFromFavs(clubUpdated, clubsResponse);
                 setClubsResponse({ ...clubsResponse, results, total });
@@ -29,8 +36,10 @@ export const useUpdateClub = (props: UseUpdateClubProps): UseUpdateClubReturnTyp
             }
         });
     };
-
-    const showToast = () => {
+    /**
+     * Shows a toast with a 200 message indicating the user has been successfully updated.
+     */
+    const showToast = (): void => {
         const { type, resMessage } = showResponseMessage({ status: 200, message: 'Saved correctly' });
         toast({
             title: resMessage,

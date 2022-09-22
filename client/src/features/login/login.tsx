@@ -12,6 +12,9 @@ export const Login = (): JSX.Element => {
      * Custom hook that is responsible for controlling the form inputs.
      */
     const { fields, errors, passwdVisible, handleFieldChange, getErrors, handleInputVisibility } = useFields(LOGIN_CONF);
+    /**
+     * Custom hook that is responsible for managing the submission of the form and its response.
+     */
     const { onSubmit } = useControlSubmit({ getErrors, email: fields.email.value, password: fields.password.value });
 
     return (

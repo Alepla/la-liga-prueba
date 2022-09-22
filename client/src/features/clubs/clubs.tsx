@@ -20,11 +20,11 @@ export const Clubs = (): JSX.Element => {
      */
     const { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, loading, setLoading, cache } = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
     /**
-     *
+     * Custom hook that we use to update the clubs.
      */
     const { onUpdateClub } = useUpdateClub({ clubsResponse, setClubsResponse, favorite: searchValues.favorite });
     /**
-     *
+     * Custom hook that we use to bring a list of clubs.
      */
     const { fetchClubs } = useFetchClubs({ searchValues, cache, setClubsResponse, setLoading });
     /**

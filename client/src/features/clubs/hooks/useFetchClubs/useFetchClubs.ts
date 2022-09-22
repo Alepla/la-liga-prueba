@@ -9,10 +9,13 @@ export const useFetchClubs = (props: UseFetchClubsProps): UseFetchClubsReturnTyp
     const toast = useToast();
 
     /**
-     *
+     * Function in charge of bringing the list of clubs.
      */
-    const fetchClubs = () => {
+    const fetchClubs = (): void => {
         const { offset, limit, name_like, favorite } = searchValues;
+        /**
+         * And depending on whether we are in favorites or not, we use the cache.
+         */
         if (cache) {
             getClubsWithCache(offset, limit, name_like, favorite).then((res: ClubsResponse): void => {
                 const { results, status } = res;
@@ -30,7 +33,12 @@ export const useFetchClubs = (props: UseFetchClubsProps): UseFetchClubsReturnTyp
         }
     };
 
-    const showToast = (status: number) => {
+    /**
+     *
+     * @param status
+     * An error message is displayed to the user in case something has gone wrong.
+     */
+    const showToast = (status: number): void => {
         const { type, resMessage } = showResponseMessage({ status: status });
         toast({
             title: resMessage,

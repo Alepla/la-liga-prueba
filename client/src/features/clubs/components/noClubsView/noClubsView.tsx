@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Center, FormControl, FormLabel } from '@chakra-ui/react';
+import { Flex, FormControl, FormLabel } from '@chakra-ui/react';
 import { ClubsNoResultsProps } from '../../clubsTypes';
 /**
  *

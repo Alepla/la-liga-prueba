@@ -27,7 +27,7 @@ export const NavBar = (): JSX.Element => {
                     </Flex>
 
                     <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
-                        <Button type={'submit'} fontSize={'sm'} fontWeight={400} variant={'link'} onClick={() => removeTokens()}>
+                        <Button type={'submit'} fontSize={'sm'} fontWeight={400} variant={'link'} onClick={(): void => removeTokens()}>
                             Log out
                         </Button>
                     </Stack>
