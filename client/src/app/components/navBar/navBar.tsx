@@ -8,6 +8,9 @@ import logo from '../../../assets/img/logo.png';
  * @returns App navigation menu
  */
 export const NavBar = (): JSX.Element => {
+    const onRemoveTokens = (): void => {
+        removeTokens();
+    };
     return (
         <>
             <Box>
@@ -27,7 +30,7 @@ export const NavBar = (): JSX.Element => {
                     </Flex>
 
                     <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
-                        <Button type={'submit'} fontSize={'sm'} fontWeight={400} variant={'link'} onClick={(): void => removeTokens()}>
+                        <Button type={'submit'} fontSize={'sm'} fontWeight={400} variant={'link'} onClick={onRemoveTokens}>
                             Log out
                         </Button>
                     </Stack>

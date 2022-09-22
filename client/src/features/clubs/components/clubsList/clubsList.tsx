@@ -47,7 +47,7 @@ export const ClubsList = (props: ClubsListProps): JSX.Element => {
                                                 {club.favorite ? 'Remove from favorites' : 'Add to favorites'}
                                             </FormLabel>
                                             <Center>
-                                                <Switch aria-label={'Update club switch'} onChange={() => updateClub(club.id, club.favorite)} isChecked={club.favorite ? true : false} />
+                                                <Switch aria-label={'Update club switch'} onChange={(): void => updateClub(club.id, club.favorite)} isChecked={club.favorite ? true : false} />
                                             </Center>
                                         </FormControl>
                                     </Stack>
