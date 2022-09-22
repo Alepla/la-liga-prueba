@@ -1,10 +1,10 @@
 export type HandlerResponseParams = {
-    message: string;
+    message?: string;
     status: number | null;
 };
 
 export type HandlerResponse = {
-    message: string;
+    resMessage: string;
     type: Status;
 };
 

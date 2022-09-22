@@ -30,9 +30,9 @@ export const useUpdateClub = (props: UseUpdateClubProps): UseUpdateClubReturnTyp
     };
 
     const showToast = () => {
-        const { type, message } = showResponseMessage({ status: 200, message: 'Saved correctly' });
+        const { type, resMessage } = showResponseMessage({ status: 200, message: 'Saved correctly' });
         toast({
-            title: message,
+            title: resMessage,
             status: type,
             duration: 9000,
             isClosable: true,

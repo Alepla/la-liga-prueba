@@ -3,7 +3,6 @@ import { Box, Button, HStack } from '@chakra-ui/react';
 import { useCounter } from '../../hooks/useCounter/useCounter';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { PaginationChildProps } from './paginationTypes';
-
 /**
  *
  * @param props
@@ -22,17 +21,11 @@ export const Pagination = (props: PaginationChildProps): JSX.Element => {
      */
     useEffect((): void => {
         onClick(count);
-    }, [count]);
-
-    /**
-     *
-     */
-    useEffect((): void => {
         if (totalPages !== numberOfPages) {
             reset();
             setNumberOfPages(totalPages);
         }
-    }, [totalPages]);
+    }, [count, totalPages]);
 
     return (
         <Box>

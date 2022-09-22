@@ -38,6 +38,7 @@ export const superFetch = async <T>(params: SuperFetchParams): Promise<T> => {
             return handleResponse(response);
         })
         .catch((error) => {
-            return error;
+            if (error.status) return error;
+            else return { status: 500 };
         });
 };

@@ -5,7 +5,7 @@ export type AuthCredentials = {
 
 export type AuthResponse = {
     token: string;
-    message: string;
+    message?: string;
     status: number;
 };
 
@@ -36,13 +36,13 @@ export type AuthenticationState = {
     accessToken?: string;
     error: {
         status: number | null;
-        message: string;
+        message?: string;
     };
     success: boolean;
 };
 
 export type ErrorResponse = {
-    message: string;
+    message?: string;
     status: number;
 };
 

@@ -8,29 +8,30 @@ import { HandlerResponse, Status, HandlerResponseParams } from './responseHandle
 export const showResponseMessage = (params: HandlerResponseParams): HandlerResponse => {
     let { message, status } = params;
     let type: Status = undefined;
+    let resMessage = '';
 
     switch (status) {
         case 200:
             type = 'success';
-            message = message ? message : '';
+            resMessage = message ? message : '';
             break;
         case 400:
             type = 'error';
-            message = message ? message : 'The request is not in the correct format';
+            resMessage = message ? message : 'The request is not in the correct format';
             break;
         case 401:
         case 403:
             type = 'error';
-            message = message ? message : 'You do not have permissions to access the requested resource';
+            resMessage = message ? message : 'You do not have permissions to access the requested resource';
             break;
         case 404:
             type = 'error';
-            message = message ? message : 'Resource not found';
+            resMessage = message ? message : 'Resource not found';
             break;
         case 500:
             type = 'error';
-            message = message ? message : 'An error has occurred on the server';
+            resMessage = message ? message : 'An error has occurred on the server';
             break;
     }
-    return { type, message };
+    return { type, resMessage };
 };

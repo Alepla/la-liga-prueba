@@ -38,16 +38,18 @@ export const useControlSubmit = (props: UseControlSubmitProps): UseControlSubmit
      */
     useEffect((): void => {
         if (accessToken) history.push('/clubs');
-        if (error.status) {
-            const { type, message } = showResponseMessage(error);
-            toast({
-                title: message,
-                status: type,
-                duration: 9000,
-                isClosable: true,
-            });
-        }
+        if (error.status) showToast();
     }, [accessToken, error]);
+
+    const showToast = () => {
+        const { type, resMessage } = showResponseMessage(error);
+        toast({
+            title: resMessage,
+            status: type,
+            duration: 9000,
+            isClosable: true,
+        });
+    };
 
     return { onSubmit } as const;
 };

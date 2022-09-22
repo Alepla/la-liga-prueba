@@ -28,23 +28,11 @@ export const Clubs = (): JSX.Element => {
      */
     const { fetchClubs } = useFetchClubs({ searchValues, cache, setClubsResponse, setLoading });
     /**
-     *
-     */
-    const updateClub = (clubID: string, isFavorite: boolean) => {
-        onUpdateClub(clubID, isFavorite);
-    };
-    /**
      * Hook that is triggered every time a parameter that can modify the /clubs query is modified, returning it has to do. If the favorites filter is active, it is done without cache, otherwise it isuses the memoize service for caching
      */
     useEffect((): void => {
         fetchClubs();
     }, [searchValues]);
-    /**
-     * Function that is triggered every time filtering by favorites and setting defaultPage to 0
-     */
-    const onClickFavorites = (): void => {
-        handleChangeFavorite();
-    };
 
     return (
         <Box m={4}>
@@ -56,12 +44,12 @@ export const Clubs = (): JSX.Element => {
                     <InputLeftElement pointerEvents={'none'} children={<Search2Icon color={'gray.300'} />} />
                     <Input aria-label={'Search club input'} borderRadius={'none'} placeholder={'Search'} onChange={handleFieldChange} />
                 </InputGroup>
-                <Button aria-label={'Favorites filter button'} onClick={onClickFavorites} borderRadius={'none'}>
-                    <StarIcon color="#ECC94B" />
+                <Button aria-label={'Favorites filter button'} onClick={handleChangeFavorite} borderRadius={'none'}>
+                    <StarIcon color={searchValues.favorite ? '#ECC94B' : 'black'} />
                 </Button>
             </Flex>
             {clubsResponse.total === 0 && !loading && <NoClubsView searchInputValue={searchValues.name_like} />}
-            {clubsResponse.total !== 0 && <ClubsList updateClub={updateClub} clubs={clubsResponse.results} />}
+            {clubsResponse.total !== 0 && <ClubsList updateClub={onUpdateClub} clubs={clubsResponse.results} />}
             <Flex justifyContent={'center'}>
                 <Pagination onClick={callbackPagination} totalPages={Math.ceil(clubsResponse.total / searchValues.limit)} />
             </Flex>

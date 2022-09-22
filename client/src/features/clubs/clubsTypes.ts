@@ -23,6 +23,7 @@ export type ClubUpdateParams = {
 export type ClubsResponse = {
     total: number;
     results: ClubsItems[];
+    status?: number;
 };
 
 export type ClubsListProps = {

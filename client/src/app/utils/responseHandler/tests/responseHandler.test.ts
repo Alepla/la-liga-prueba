@@ -9,7 +9,7 @@ describe('showResponseMessage utility tests', () => {
         };
         const response: HandlerResponse = {
             type: 'success',
-            message: params.message,
+            resMessage: params.message!,
         };
         expect(showResponseMessage(params)).toStrictEqual(response);
     });
@@ -21,7 +21,7 @@ describe('showResponseMessage utility tests', () => {
         };
         const response: HandlerResponse = {
             type: 'error',
-            message: 'The request is not in the correct format',
+            resMessage: 'The request is not in the correct format',
         };
         expect(showResponseMessage(params)).toStrictEqual(response);
     });
@@ -33,7 +33,7 @@ describe('showResponseMessage utility tests', () => {
         };
         const response: HandlerResponse = {
             type: 'error',
-            message: 'Invalid user',
+            resMessage: 'Invalid user',
         };
         expect(showResponseMessage(params)).toStrictEqual(response);
     });
