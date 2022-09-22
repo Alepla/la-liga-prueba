@@ -87,6 +87,14 @@ Como se podrá ver la mayoría de la app cumple con este principio, pero en el c
 
 El objetivo es superar el 75% de coverage, si el tiempo lo permite, de momento ronda el 60%.
 
+**Custom hooks:**
+
+-Login, existen dos custom hooks, uno de ellos se encarga de las validaciones del formulario, y el otro del submit de los inputs del formualrio y de procesar la respuesta, en este es donde se hace la llamada a redux-saga.
+
+-Clubs, existen tres custom hooks, uno para procesar el filtrado y paginado del listado de clubs, otro del fetch del listado y el último del update de los clubs.
+
+-useCounter, este un hook que puse a nivel de applicación ya que se puede reutilizar perfectamente en cualquier otro componente.
+
 **Estructura del cliente**
 
 ```text
@@ -98,21 +106,21 @@ src/
 | |-- hooks/ ------------------->Contiene hooks que pueden ser reutilizados
 | | |-- useCounter/
 | |-- middleware/ -------------->Contiene middlewares
-| | |-- authInterceptor.ts
-| | |-- memoize.ts
+| | |-- authInterceptor.ts------>Se usa en la función superFetch, para interceptar la llamada e introducir el token en los headers
+| | |-- memoize.ts ------------->Se encarga de cachear la respuesta de las funciones donde se usa
 | | |-- rootSaga.ts
-| |-- routing/ -------------->Contiene todo el sistema de routing
+| |-- routing/ ----------------->Contiene todo el sistema de routing
 | | |-- customRouter/
 | | |-- protectedRouter/
 | | |-- appRouter.tsx
-| |-- types/ -------------->Contiene tipados que se reutilizan en varios sitios de la app
+| |-- types/ ------------------->Contiene tipados que se reutilizan en varios sitios de la app
 | | |-- apiParamsTypes.ts
-| |-- utils/ -------------->Contiene funciones que se reutilizan en toda la applicación
-| | |-- formDate/
-| | |-- responseHandler/
-| | |-- superFetch/
-| | |-- authInterceptor.ts
-| | |-- localStorage.ts
+| |-- utils/ ------------------->Contiene funciones que se reutilizan en toda la applicación
+| | |-- formDate/--------------->Encargado del formateo de las fechas
+| | |-- responseHandler/-------->Encargado de las respuestas de la api
+| | |-- superFetch/------------->Fetch global para toda la aplicación
+| | |-- authInterceptorService.ts
+| | |-- localStorage.ts--------->Encargado del control del token y sus acciones
 | | |-- testUtils.ts
 | |-- hooks.ts
 | |-- store.ts
@@ -139,7 +147,6 @@ src/
 | | | | |-- useFieldsTypes.ts
 | | |-- tests/ -------------->Tests para la feature
 | | | |-- login.test.tsx
-| | | |-- loginService.test.tsx
 | | | |-- loginSlice.test.tsx
 | | |-- login.tsx
 | | |-- loginConsts.ts
@@ -147,7 +154,6 @@ src/
 | | |-- loginService.ts
 | | |-- loginSlice.ts
 | | |-- loginTypes.ts
-| | |-- notFoundPage.tsx
 | |-- notFoundPage/
 | | |-- tests/
 | | | |-- notFoundPage.test.tsx

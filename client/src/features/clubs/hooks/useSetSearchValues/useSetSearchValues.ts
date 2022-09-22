@@ -53,6 +53,9 @@ export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValue
         });
     };
 
+    /**
+     * Function that clareas search input.
+     */
     const resetSeatchValues = (): void => {
         setSearchValues({
             ...searchValues,
