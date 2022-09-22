@@ -57,7 +57,7 @@ yarn && yarn start
 
 **_ Puedes documentar aquí la memoria de tu prueba _**
 
-> Para documentar la memoria de la prueba he decidido utilizar un tablero de trello, donde he ido separando cada una de las tareas y posteriormente documentado el proceso de cada una de ellas, recomiendo echarle un vistazo ya que ahí explico el porque de muchas de mis decisiones: https://trello.com/b/hVER0MrX/la-liga-app
+Para documentar la memoria de la prueba he decidido utilizar un tablero de trello, donde he ido separando cada una de las tareas y posteriormente documentado el proceso de cada una de ellas, recomiendo echarle un vistazo ya que ahí explico el porque de muchas de mis decisiones: https://trello.com/b/hVER0MrX/la-liga-app
 
 > Endpoint live demo: http://51.178.18.68:3000/
 

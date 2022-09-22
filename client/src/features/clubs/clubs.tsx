@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination } from '../../app/components/pagination/pagination';
 import { ClubsList } from './components/clubsList/clubsList';
-import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Progress } from '@chakra-ui/react';
+import { Box, Button, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Progress } from '@chakra-ui/react';
 import { CLUBS_SEARCH_DEFAULT_PARAMS, CLUBS_DEFAULT_RESPONSE } from './clubsConsts';
 import { useSetSearchValues } from './hooks/useSetSearchValues/useSetSearchValues';
 import { ClubsResponse } from './clubsTypes';
-import { Search2Icon, StarIcon } from '@chakra-ui/icons';
+import { Search2Icon, SmallCloseIcon, StarIcon } from '@chakra-ui/icons';
 import { NoClubsView } from './components/noClubsView/noClubsView';
 import { useUpdateClub } from './hooks/useUpdateClub/useUpdateClub';
 import { useFetchClubs } from './hooks/useFetchClubs/useFetchClubs';
@@ -18,7 +18,7 @@ export const Clubs = (): JSX.Element => {
     /**
      * Custom hook that we use to control the state of each filter of the clubs list.
      */
-    const { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, loading, setLoading, cache } = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
+    const { callbackPagination, handleFieldChange, handleChangeFavorite, searchValues, loading, setLoading, cache, resetSeatchValues } = useSetSearchValues(CLUBS_SEARCH_DEFAULT_PARAMS);
     /**
      * Custom hook that we use to update the clubs.
      */
@@ -42,7 +42,8 @@ export const Clubs = (): JSX.Element => {
             <Flex justifyContent={'center'}>
                 <InputGroup maxWidth={['66%', '50%']}>
                     <InputLeftElement pointerEvents={'none'} children={<Search2Icon color={'gray.300'} />} />
-                    <Input aria-label={'Search club input'} borderRadius={'none'} placeholder={'Search'} onChange={handleFieldChange} />
+                    <Input aria-label={'Search club input'} borderRadius={'none'} placeholder={'Search'} onChange={handleFieldChange} value={searchValues.name_like} />
+                    {searchValues.name_like && <InputRightElement cursor={'pointer'} children={<SmallCloseIcon color={'gray.300'} />} onClick={resetSeatchValues} />}
                 </InputGroup>
                 <Button aria-label={'Favorites filter button'} onClick={handleChangeFavorite} borderRadius={'none'}>
                     <StarIcon color={searchValues.favorite ? '#ECC94B' : 'black'} />

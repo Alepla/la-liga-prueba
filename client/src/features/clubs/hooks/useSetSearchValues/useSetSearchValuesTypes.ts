@@ -9,4 +9,5 @@ export type UseSetSearchValuesReturnType = {
     callbackPagination: (offset: number) => void;
     handleFieldChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleChangeFavorite: () => void;
+    resetSeatchValues: () => void;
 };

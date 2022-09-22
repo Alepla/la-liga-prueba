@@ -52,5 +52,13 @@ export const useSetSearchValues = (initialState: ClubsParams): UseSetSearchValue
             favorite: !searchValues.favorite,
         });
     };
-    return { callbackPagination, handleFieldChange, handleChangeFavorite, setLoading, searchValues, loading, cache } as const;
+
+    const resetSeatchValues = (): void => {
+        setSearchValues({
+            ...searchValues,
+            name_like: '',
+        });
+    };
+
+    return { callbackPagination, handleFieldChange, handleChangeFavorite, setLoading, searchValues, loading, cache, resetSeatchValues } as const;
 };
