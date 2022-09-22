@@ -59,7 +59,7 @@ yarn && yarn start
 
 Para documentar la memoria de la prueba he decidido utilizar un tablero de trello, donde he ido separando cada una de las tareas y posteriormente documentado el proceso de cada una de ellas: https://trello.com/b/hVER0MrX/la-liga-app
 
-Endpoint live demo:
+Endpoint live demo: http://51.178.18.68:3000/
 
 De todas formas voy a resumir aquí algunas cosas interesantes a destacar:
 
